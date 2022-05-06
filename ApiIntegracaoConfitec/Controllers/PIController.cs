@@ -18,7 +18,7 @@ namespace ApiIntegracaoConfitec.Controllers
         }
 
 
-
+        // teste commit
         //GET: api/PI
         [HttpGet]
         //[Authorize] //TODO: VALIDAR
