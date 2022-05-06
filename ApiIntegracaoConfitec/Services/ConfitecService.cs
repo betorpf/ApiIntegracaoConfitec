@@ -1,5 +1,6 @@
 ﻿using ApiIntegracaoConfitec.Interfaces.Service;
 using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 
 namespace ApiIntegracaoConfitec.Services
 {
@@ -15,18 +16,18 @@ namespace ApiIntegracaoConfitec.Services
         }
 
         //TODO: Implementar
-        //public async Task<> Get()
-        //{
-        //    try
-        //    {
+        public async Task<string> Get()
+        {
+            try
+            {
+                return "";
+            }
+            catch (System.Exception)
+            {
 
-        //    }
-        //    catch (System.Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
+                throw;
+            }
+        }
 
     }
 }
