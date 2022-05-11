@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using ApiIntegracaoConfitec.Interfaces.Services;
+using System.Collections.Generic;
 
 namespace ApiIntegracaoConfitec.Models.Confitec
 {
-    public class PedidoInspecao
+    public class RequestSolicitacaoInspecao : IRequest
     {
         public string matriculaUsuario { get; set; }
         public string codigoEmpresaGrupoSegurador { get; set; }

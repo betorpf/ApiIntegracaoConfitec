@@ -13,29 +13,20 @@ namespace ApiIntegracaoConfitec.Controllers
 
         }
 
-        //POST: api/SolicitarPedidoDeInspecao
-        [Route("SolicitarPedidoDeInspecao")]
+        //POST: api/SolicitarInspecao
+        [Route("SolicitarInspecao")]
         [HttpPost]
         //[Authorize] //TODO: VALIDAR
-        public async Task<ActionResult<bool>> SolicitarPedidoDeInspecao(string inspecao)
+        public async Task<ActionResult<bool>> SolicitarInspecao(string inspecao)
         {
             return true;
         }
 
-        //POST: api/VerificarLaudo
-        [Route("VerificarLaudo")]
+        //POST: api/CancelarInspecao
+        [Route("CancelarInspecao")]
         [HttpPost]
         //[Authorize] //TODO: VALIDAR
-        public async Task<ActionResult<bool>> VerificarLaudo(string inspecao)
-        {
-            return true;
-        }
-
-        //POST: api/VerificarCancelamentos
-        [Route("VerificarCancelamentos")]
-        [HttpPost]
-        //[Authorize] //TODO: VALIDAR
-        public async Task<ActionResult<bool>> VerificarCancelamentos(string inspecao)
+        public async Task<ActionResult<bool>> CancelarInspecao(string inspecao)
         {
             return true;
         }

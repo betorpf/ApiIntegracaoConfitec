@@ -11,8 +11,9 @@ namespace ApiIntegracaoConfitec.Configurations
         public static void ConfigurationDependencyInjection(IServiceCollection services)
         {
             #region Dependency Injection
-            services.AddTransient<IPIBusiness, PIBusiness>();
             services.AddTransient<IConfitecService, ConfitecService>();
+            services.AddTransient<ISompoBusiness, SompoBusiness>();
+            services.AddTransient<IConfitecBusiness, ConfitecBusiness>();
             #endregion
         }
     }

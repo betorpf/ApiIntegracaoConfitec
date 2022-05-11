@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using ApiIntegracaoConfitec.Interfaces.Services;
+using System.Collections.Generic;
 
 namespace ApiIntegracaoConfitec.Models.Confitec
 {
-    public class RetornoConfitec
+    public class ResponseSolicitacaoInspecao : IResponse
     {
         public string numeroInspecao { get; set; }
         public string dataProcessamento { get; set; }

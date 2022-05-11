@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ApiIntegracaoConfitec.Models.Confitec;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace ApiIntegracaoConfitec.Controllers
@@ -13,25 +14,14 @@ namespace ApiIntegracaoConfitec.Controllers
 
         }
 
-        //POST: api/ReceberNumeroInspecao
-        [Route("ReceberNumeroInspecao")]
+        //POST: api/EnviarRetornoInspecao
+        [Route("EnviarRetornoInspecao")]
         [HttpPost]
         //[Authorize] //TODO: VALIDAR
-        public async Task<ActionResult<bool>> ReceberNumeroInspecao(string inspecao)
+        public async Task<ActionResult<bool>> EnviarRetornoInspecao(ResponseSolicitacaoInspecao retornoLaudo)
         {
             return true;
         }
-
-        //POST: api/ReceberLaudo
-        [Route("ReceberLaudo")]
-        [HttpPost]
-        //[Authorize] //TODO: VALIDAR
-        public async Task<ActionResult<bool>> ReceberLaudo(string inspecao)
-        {
-            return true;
-        }
-
-
 
     }
 }
