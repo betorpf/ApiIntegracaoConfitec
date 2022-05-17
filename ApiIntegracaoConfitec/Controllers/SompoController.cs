@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ApiIntegracaoConfitec.Interfaces.Business.Sompo;
+using ApiIntegracaoConfitec.Models.Sompo.Controller;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -8,28 +9,37 @@ namespace ApiIntegracaoConfitec.Controllers
     [ApiController]
     public class SompoController : ControllerBase
     {
-        public SompoController()
-        {
-
-        }
-
         //POST: api/SolicitarInspecao
         [Route("SolicitarInspecao")]
         [HttpPost]
         //[Authorize] //TODO: VALIDAR
-        public async Task<ActionResult<bool>> SolicitarInspecao(string inspecao)
+        public async Task<ActionResult<SolicitarInspecaoResponse>> SolicitarInspecao(
+                [FromServices] ISolicitarInspecaoHandler handler,
+                [FromBody] SolicitarInspecaoRequest request)
         {
-            return true;
+
+            //TODO: Validar request
+
+            SolicitarInspecaoResponse response = await handler.Handle(request);
+
+            return this.Ok(response);
         }
 
         //POST: api/CancelarInspecao
         [Route("CancelarInspecao")]
         [HttpPost]
         //[Authorize] //TODO: VALIDAR
-        public async Task<ActionResult<bool>> CancelarInspecao(string inspecao)
+        public async Task<ActionResult<CancelarInspecaoResponse>> CancelarInspecao(
+                [FromServices] ICancelarInspecaoHandler handler,
+                [FromBody] CancelarInspecaoRequest request)
         {
-            return true;
+            //TODO: Validar request
+
+            CancelarInspecaoResponse response = await handler.Handle(request);
+
+            return this.Ok(response);
         }
+
 
     }
 }

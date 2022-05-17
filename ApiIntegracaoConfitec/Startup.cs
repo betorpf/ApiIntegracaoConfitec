@@ -1,16 +1,11 @@
+using ApiIntegracaoConfitec.Configurations;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace prjApiIntegracaoConfitec
 {
@@ -28,9 +23,11 @@ namespace prjApiIntegracaoConfitec
         {
 
             services.AddControllers();
+            services.AddMediatR(typeof(Startup));
+            DependencyInjection.ConfigurationDependencyInjection(services);
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "prjApiIntegracaoConfitec", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Integração Confitec", Version = "v1" });
             });
         }
 
@@ -41,7 +38,7 @@ namespace prjApiIntegracaoConfitec
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "prjApiIntegracaoConfitec v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api Integração Confitec v1"));
             }
 
             app.UseHttpsRedirection();
