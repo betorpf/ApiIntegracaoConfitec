@@ -1,0 +1,35 @@
+tmp.codigoRamo			 		as decimal(3,0) 				
+tmp.codigoModalidade			 as decimal(10,0) 		
+tmp.nomeContato			 		char(40) 
+tmp.telefoneNumeroContato	char(14)
+tmp.codigoCorretorPrincipal	bigint
+tmp.numeroProposta			varchar(6)
+tmp.numeroObjetoSegurado	varchar(130) 
+tmp.numeroApolice				as decimal(10,0)
+tmp.numeroEndosso				as decimal(6,0)
+tmp.codigoUf					varchar(2)	 	
+tmp.nomeMunicipio			varchar(30)	
+tmp.numeroCep				varchar(8) 	
+tmp.nomeBairro			 varchar(30)	
+tmp.nomeLogradouro				varchar(50)
+tmp.numeroLogradouro		varchar(8)
+tmp.nomeComplemento				varchar(20)
+tmp.codigoTipoLogradouro		varchar(3)
+tmp.codigoTipoPessoa		varchar(1)
+tmp.nomeSegurado			varchar(60)
+tmp.numeroCpfCnpjSegurado	varchar(14)
+tmp.dataPedidoInspecao			decimal(8,0) 
+tmp.observacoes			 	varchar(250) 
+tmp.descricaoObjetoSegurado	varchar(130) 
+tmp.codigoCobertura			numeric(4,0)
+tmp.valorLmi			 	decimal(15,2)
+tmp.nomeContato			 	?
+tmp.telefoneNumeroContato	?
+tmp.nomeContato			 	?
+tmp.telefoneNumeroContato	?
+tmp.numeroSinistro			decimal(7,0) 	
+tmp.causaGeradora			?
+tmp.dataOcorrencia			?
+tmp.valorSinistro			decimal(15,2)
+tmp.descricaoCampo			?
+tmp.conteudoCampo			?
