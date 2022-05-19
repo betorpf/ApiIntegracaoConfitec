@@ -1,9 +1,8 @@
 ﻿using ApiIntegracaoConfitec.Domain.Entity;
-using ApiIntegracaoConfitec.Interfaces.Infrastructure.Factory;
+using ApiIntegracaoConfitec.Interfaces.Infrastructure.Connection;
 using ApiIntegracaoConfitec.Interfaces.Infrastructure.Repository;
 using Dapper;
 using System;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,9 +10,9 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
 {
     public class DadosInspecaoSompoRepository : IDadosInspecaoSompoRepository
     {
-        private readonly IConnectionFactory _connection;
+        private readonly ISQLConnectionDefault _connection;
 
-        public DadosInspecaoSompoRepository(IConnectionFactory connection)
+        public DadosInspecaoSompoRepository(ISQLConnectionDefault connection)
         {
             this._connection = connection;
         }
