@@ -1,0 +1,44 @@
+IF EXISTS (
+		SELECT *
+		FROM sys.objects WITH (NOLOCK)
+		WHERE name = 'sp_brq_cancela_inspecao'
+		)
+	DROP PROCEDURE sp_brq_cancela_inspecao
+GO
+
+CREATE PROCEDURE sp_brq_cancela_inspecao @NUM_PI INT
+AS
+BEGIN
+	SET NOCOUNT ON
+
+	CREATE TABLE #temp (
+		 codigoResultado BIT
+		,mensagemRetorno VARCHAR(100)
+		)
+
+	/*VARIÁVEIS*/
+	DECLARE @L_COD_STATUS INT
+	DECLARE @L_STATUS_ACAO INT
+	SET @L_COD_STATUS = 7
+	SET @L_STATUS_ACAO = 2
+
+	-- O serviço da SOMPO ficará rodando e procurando as propostas transmitidas que foram canceladas e 
+	-- precisam cancelar a inspeção, quando encontrar irá chamar o serviço da BRQ com o número do PI (NUM_PI) e 
+	-- flag de cancelamento (será desenvolvido pela Confitec a solução de cancelamento)
+
+	-- A BRQ irá receber o campo chave NUM_PI e a flag de cancelamento, e irá acessar a Confitec com esses dados, onde a inspeção deverá ser cancelada
+
+	-- Após retorno da Confitec com o cancelamento da inspeção a BRQ deverá atualizar a tabela de inspeção com Cod_Status = 7 e a tabela do BPM com Status_acao = 2
+
+	SELECT @NUM_INSP = num_insp FROM inspecao..tab_insp WHERE num_pi = @NUM_PI
+
+	UPDATE Inspecao.dbo.TAB_INSP SET Cod_Status = @L_COD_STATUS	WHERE NUM_INSP = @NUM_INSP
+	
+	UPDATE GED.DBO.TAB_STAT_EMIS SET status_acao = @L_STATUS_ACAO WHERE NUM_PI = @NUM_PI
+
+	IF (@NUM_PI <> 0)
+	BEGIN
+		SELECT TOP 1 *
+		FROM #temp
+	END
+END
