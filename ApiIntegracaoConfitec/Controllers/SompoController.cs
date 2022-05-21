@@ -17,12 +17,20 @@ namespace ApiIntegracaoConfitec.Controllers
                 [FromServices] ISolicitarInspecaoHandler handler,
                 [FromBody] SolicitarInspecaoRequest request)
         {
-
             //TODO: Validar request
 
-            SolicitarInspecaoResponse response = await handler.Handle(request);
-
-            return this.Ok(response);
+            SolicitarInspecaoResponse response = new();
+            try
+            {
+                response = await handler.Handle(request);
+                return this.Ok(response);
+            }
+            catch (System.Exception ex)
+            {
+                response.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                response.Message = ex.Message;
+                return this.BadRequest(response);
+            }           
         }
 
         //POST: api/CancelarInspecao

@@ -58,12 +58,15 @@ namespace ApiIntegracaoConfitec.Services
         public async Task<ResponseSolicitacaoInspecao> SolicitarInspecao(RequestSolicitacaoInspecao pedidoInspecao)
         {
             ResponseSolicitacaoInspecao responseSolicitacaoInspecao = null;
+            string confitecResponse = "";
             try
             {
                 using (var client = new HttpClient())
                 {
                     string jsonContent = JsonConvert.SerializeObject(pedidoInspecao);
-                    string confitecResponse = await this.GenericPost("/inspecao/pedido/async", jsonContent);
+                    //TODO: AGUARDAR CONFITEC
+                    confitecResponse = await this.GenericPost("/inspecao/pedido/async", jsonContent);
+                    confitecResponse = "{\"numeroInspecao\": 1,\"dataProcessamento\": \"20/05/2022\",\"codigoResultado\": 1,\"mensagemRetorno\": \"\",\"protocoloAbertura\": \"Sucesso\",\"erros\": null}";
                     responseSolicitacaoInspecao = JsonConvert.DeserializeObject<ResponseSolicitacaoInspecao>(confitecResponse);
                 }
             }
@@ -93,7 +96,7 @@ namespace ApiIntegracaoConfitec.Services
             return responseCancelamentoInspecao;
         }
 
-        public async Task<string> GenericPost(string method, string jsonContent)
+        public async Task<string> GenericPost(string method, string jsonContent, string access_token = null)
         {
             string responseString = null;
             try
@@ -106,8 +109,8 @@ namespace ApiIntegracaoConfitec.Services
                     var requestString = new StringContent(jsonContent, Encoding.UTF8, "application/json");
                     requestString.Headers.ContentType = new
                     MediaTypeHeaderValue("application/json");
-                    requestString.Headers.Add("Authorization", "");
-
+                    if(!String.IsNullOrEmpty(access_token))
+                        requestString.Headers.Add("Authorization", access_token.ToString());
 
                     HttpResponseMessage response = await client.PostAsync(method, requestString);
                     if (response.IsSuccessStatusCode)

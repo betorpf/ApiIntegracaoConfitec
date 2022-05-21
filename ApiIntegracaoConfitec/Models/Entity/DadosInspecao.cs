@@ -1,4 +1,4 @@
-﻿namespace ApiIntegracaoConfitec.Domain.Entity
+﻿namespace ApiIntegracaoConfitec.Models.Entity
 {
     public class DadosInspecao
     {

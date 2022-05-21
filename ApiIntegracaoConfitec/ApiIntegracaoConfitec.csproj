@@ -5,9 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Domain\Entity\**" />
     <Compile Remove="Dtos\**" />
+    <Content Remove="Domain\Entity\**" />
     <Content Remove="Dtos\**" />
+    <EmbeddedResource Remove="Domain\Entity\**" />
     <EmbeddedResource Remove="Dtos\**" />
+    <None Remove="Domain\Entity\**" />
     <None Remove="Dtos\**" />
   </ItemGroup>
 

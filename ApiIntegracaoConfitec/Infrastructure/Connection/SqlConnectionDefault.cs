@@ -11,7 +11,7 @@ namespace ApiIntegracaoConfitec.Infrastructure.Connection
         private readonly IConfiguration _config;
         public SqlConnectionDefault(IConfiguration config)
         {
-            _config = config;
+            this._config = config;
         }
         public IDbConnection Connection()
         {

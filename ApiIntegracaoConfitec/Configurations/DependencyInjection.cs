@@ -23,6 +23,8 @@ namespace ApiIntegracaoConfitec.Configurations
             services.AddScoped<ICancelarInspecaoHandler, CancelarInspecaoHandler>();
             services.AddScoped<ISQLConnectionDefault, SqlConnectionDefault>();
             services.AddScoped<IDadosInspecaoSompoRepository, DadosInspecaoSompoRepository>();
+            services.AddScoped<IEnviarSolicitacaoInspecaoConfitecHandler, EnviarSolicitacaoInspecaoConfitecHandler>();
+            services.AddScoped<IBuscarDadosAutenticacaoConfitecHandler, BuscarDadosAutenticacaoConfitecHandler>();
             #endregion
         }
     }

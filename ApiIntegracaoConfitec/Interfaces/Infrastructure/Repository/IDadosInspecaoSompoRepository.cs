@@ -1,4 +1,4 @@
-﻿using ApiIntegracaoConfitec.Domain.Entity;
+﻿using ApiIntegracaoConfitec.Models.Entity;
 using System.Threading.Tasks;
 
 namespace ApiIntegracaoConfitec.Interfaces.Infrastructure.Repository
@@ -7,6 +7,7 @@ namespace ApiIntegracaoConfitec.Interfaces.Infrastructure.Repository
     {
 
         Task<DadosInspecao> RetornaDadosInspecao(string pi);
-        Task<DadosCancelarInspecao> RetornaDadosCancelarInspecao(string pi); 
+        Task<DadosCancelarInspecao> RetornaDadosCancelarInspecao(string pi);
+        Task<DadosAutenticacao> RetornaDadosAutenticacao();
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ApiIntegracaoConfitec.Interfaces.Services;
+using ApiIntegracaoConfitec.Models.Entity;
 using System.Collections.Generic;
 
 namespace ApiIntegracaoConfitec.Models.Confitec
@@ -50,9 +51,75 @@ namespace ApiIntegracaoConfitec.Models.Confitec
         public string descricaoObjetoSegurado { get; set; }
         public string dataPedidoOriginal { get; set; }
         public string sistemaOrigem { get; set; }
-        public List<ListaCoberturaInspecao> listaCoberturaInspecao { get; set; }
-        public List<ListaTelefoneContato> listaTelefoneContato { get; set; }
-        public List<ListaSinistro> listaSinistro { get; set; }
-        public List<ListaCamposVariaveis> listaCamposVariaveis { get; set; }
+        public List<CoberturaInspecao> listaCoberturaInspecao { get; set; }
+        public List<TelefoneContato> listaTelefoneContato { get; set; }
+        public List<Sinistro> listaSinistro { get; set; }
+        public List<CamposVariaveis> listaCamposVariaveis { get; set; }
+
+        public RequestSolicitacaoInspecao(DadosInspecao dadosInspecao)
+        {
+            this.codigoRamo = dadosInspecao.codigoRamo.ToString();
+            this.codigoModalidade = dadosInspecao.codigoModalidade.ToString();
+            this.nomeContato = dadosInspecao.nomeContato;
+            this.telefoneNumeroContato = dadosInspecao.telefoneNumeroContato;
+            this.codigoCorretorPrincipal = dadosInspecao.codigoCorretorPrincipal.ToString();
+            this.numeroProposta = dadosInspecao.numeroProposta;
+            this.numeroObjetoSegurado = dadosInspecao.numeroObjetoSegurado;
+            this.numeroApolice = dadosInspecao.numeroApolice.ToString();
+            this.numeroEndosso = dadosInspecao.numeroEndosso.ToString();
+            this.codigoUf = dadosInspecao.codigoUf;
+            this.nomeMunicipio = dadosInspecao.nomeMunicipio;
+            this.numeroCep = dadosInspecao.numeroCep;
+            this.nomeBairro = dadosInspecao.nomeBairro;
+            this.nomeLogradouro = dadosInspecao.nomeLogradouro;
+            this.numeroLogradouro = dadosInspecao.numeroLogradouro;
+            this.nomeComplemento = dadosInspecao.nomeComplemento;
+            this.codigoTipoLogradouro = dadosInspecao.codigoTipoLogradouro;
+            this.codigoTipoPessoa = dadosInspecao.codigoTipoPessoa;
+            this.nomeSegurado = dadosInspecao.nomeSegurado;
+            this.numeroCpfCnpjSegurado = dadosInspecao.numeroCpfCnpjSegurado;
+            this.dataPedidoInspecao = dadosInspecao.dataPedidoInspecao.ToString();
+            this.observacoes = dadosInspecao.observacoes;
+            this.descricaoObjetoSegurado = dadosInspecao.descricaoObjetoSegurado;
+
+            this.listaCoberturaInspecao = new List<CoberturaInspecao>();
+            this.listaCoberturaInspecao.Add(new CoberturaInspecao()
+            {
+                codigoCobertura = dadosInspecao.codigoCobertura.ToString(),
+                valorLmi = dadosInspecao.valorLmi.ToString()
+            });
+
+
+            this.listaTelefoneContato = new List<TelefoneContato>();
+            this.listaTelefoneContato.Add(new TelefoneContato()
+            {
+                nomeContato = dadosInspecao.nomeContato1,
+                telefoneNumeroContato = dadosInspecao.telefoneNumeroContato1
+            });
+
+            this.listaTelefoneContato.Add(new TelefoneContato()
+            {
+                nomeContato = dadosInspecao.nomeContato2,
+                telefoneNumeroContato = dadosInspecao.telefoneNumeroContato2
+            });
+
+            this.listaSinistro = new List<Sinistro>();
+            this.listaSinistro.Add(new Sinistro()
+            {
+                numeroSinistro = dadosInspecao.numeroSinistro.ToString(),
+                causaGeradora = dadosInspecao.causaGeradora,
+                dataOcorrencia = dadosInspecao.dataOcorrencia,
+                valorSinistro = dadosInspecao.valorSinistro.ToString()
+            });
+
+
+            this.listaCamposVariaveis = new List<CamposVariaveis>();
+            this.listaCamposVariaveis.Add(new CamposVariaveis()
+            {
+                descricaoCampo = dadosInspecao.descricaoCampo,
+                conteudoCampo = dadosInspecao.conteudoCampo
+            });
+        }
+
     }
 }

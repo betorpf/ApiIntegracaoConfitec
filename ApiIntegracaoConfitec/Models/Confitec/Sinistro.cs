@@ -2,7 +2,7 @@
 
 namespace ApiIntegracaoConfitec.Models.Confitec
 {
-    public class ListaSinistro
+    public class Sinistro
     {
         public string numeroSinistro { get; set; }
         public string statusSinistro { get; set; }

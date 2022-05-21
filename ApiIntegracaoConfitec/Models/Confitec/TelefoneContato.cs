@@ -1,6 +1,6 @@
 ﻿namespace ApiIntegracaoConfitec.Models.Confitec
 {
-    public class ListaTelefoneContato
+    public class TelefoneContato
     {
         public string nomeContato { get; set; }
         public string telefoneDDIContato { get; set; }

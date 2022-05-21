@@ -1,6 +1,6 @@
 ﻿namespace ApiIntegracaoConfitec.Models.Confitec
 {
-    public class ListaCoberturaInspecao
+    public class CoberturaInspecao
     {
         public string codigoCobertura { get; set; }
         public string valorLmi { get; set; }
