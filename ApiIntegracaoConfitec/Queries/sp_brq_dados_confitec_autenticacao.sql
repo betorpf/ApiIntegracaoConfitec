@@ -10,16 +10,16 @@ CREATE PROCEDURE sp_brq_dados_confitec_autenticacao
 AS
 BEGIN
 	SET NOCOUNT ON
-	
+
 	CREATE TABLE #temp (
-		 sompo_username	VARCHAR(50)
-		,sompo_password	VARCHAR(50)
+		SompoUsername VARCHAR(50)
+		,SompoPassword VARCHAR(50)
 		)
 
-	insert into #temp
-	values(
-		'sompo_username'
-		,'sompo_password'
+	INSERT INTO #temp
+	VALUES (
+		'SompoUsername'
+		,'SompoPassword'
 		)
 
 	SELECT TOP 1 *
