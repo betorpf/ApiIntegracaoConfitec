@@ -25,6 +25,8 @@ namespace ApiIntegracaoConfitec.Configurations
             services.AddScoped<IDadosInspecaoSompoRepository, DadosInspecaoSompoRepository>();
             services.AddScoped<IEnviarSolicitacaoInspecaoConfitecHandler, EnviarSolicitacaoInspecaoConfitecHandler>();
             services.AddScoped<IBuscarDadosAutenticacaoConfitecHandler, BuscarDadosAutenticacaoConfitecHandler>();
+            services.AddScoped<ISolicitarAutenticacaoConfitecHandler, SolicitarAutenticacaoConfitecHandler>();
+            services.AddScoped<IGravarRespostaInspecaoHandler, GravarRespostaInspecaoHandler>();
             #endregion
         }
     }

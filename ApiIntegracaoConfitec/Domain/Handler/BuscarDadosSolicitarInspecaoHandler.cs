@@ -15,11 +15,11 @@ namespace ApiIntegracaoConfitec.Domain.Handler
             this._dadosInspecaoSompoRepository = dadosInspecaoSompoRepository;
         }
 
-        public async Task<BuscaDadosSolicitarInspecaoResponse> Handle(BuscaDadosSolicitarInspecaoRequest request)
+        public async Task<BuscarDadosSolicitarInspecaoResponse> Handle(BuscarDadosSolicitarInspecaoRequest request)
         {
-            DadosInspecao dadosInspecao = await this._dadosInspecaoSompoRepository.RetornaDadosInspecao(request.pi.ToString());
+            DadosInspecao dadosInspecao = await this._dadosInspecaoSompoRepository.RetornarDadosInspecao(request.pi.ToString());
 
-            BuscaDadosSolicitarInspecaoResponse response = new BuscaDadosSolicitarInspecaoResponse(dadosInspecao);
+            BuscarDadosSolicitarInspecaoResponse response = new BuscarDadosSolicitarInspecaoResponse(dadosInspecao);
 
             return response;
         }

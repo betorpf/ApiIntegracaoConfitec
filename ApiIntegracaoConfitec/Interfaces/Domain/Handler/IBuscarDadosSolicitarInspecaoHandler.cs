@@ -5,6 +5,6 @@ namespace ApiIntegracaoConfitec.Interfaces.Domain.Handler
 {
     public interface IBuscarDadosSolicitarInspecaoHandler
     {
-        Task<BuscaDadosSolicitarInspecaoResponse> Handle(BuscaDadosSolicitarInspecaoRequest request);
+        Task<BuscarDadosSolicitarInspecaoResponse> Handle(BuscarDadosSolicitarInspecaoRequest request);
     }
 }

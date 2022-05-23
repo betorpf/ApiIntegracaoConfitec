@@ -4,9 +4,9 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
 {
     public class EnviarSolicitacaoInspecaoConfitecResponse
     {
-        private ResponseSolicitacaoInspecao response;
+        public ResponseSolicitarInspecao response;
 
-        public EnviarSolicitacaoInspecaoConfitecResponse(ResponseSolicitacaoInspecao response)
+        public EnviarSolicitacaoInspecaoConfitecResponse(ResponseSolicitarInspecao response)
         {
             this.response = response;
         }

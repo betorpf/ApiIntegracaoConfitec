@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApiIntegracaoConfitec.Models.Confitec
 {
-    public class ResponseSolicitacaoInspecao : IResponse
+    public class ResponseSolicitarInspecao : IResponse
     {
         public string numeroInspecao { get; set; }
         public string dataProcessamento { get; set; }

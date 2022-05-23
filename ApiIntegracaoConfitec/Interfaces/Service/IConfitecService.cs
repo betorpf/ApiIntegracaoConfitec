@@ -9,9 +9,9 @@ namespace ApiIntegracaoConfitec.Interfaces.Service
 
         Task<ResponseToken> Autenticacao(RequestToken requestToken);
 
-        Task<ResponseSolicitacaoInspecao> SolicitarInspecao(RequestSolicitacaoInspecao pedidoInspecao);
+        Task<ResponseSolicitarInspecao> SolicitarInspecao(RequestSolicitacaoInspecao pedidoInspecao, string access_token = null);
 
-        Task<ResponseCancelamentoInspecao> CancelarInspecao(RequestCancelamentoInspecao requestCancelamentoInspecao);
+        Task<ResponseCancelamentoInspecao> CancelarInspecao(RequestCancelamentoInspecao requestCancelamentoInspecao, string access_token = null);
 
         Task<string> GenericPost(string method, string jsonContent, string access_token = null);
 

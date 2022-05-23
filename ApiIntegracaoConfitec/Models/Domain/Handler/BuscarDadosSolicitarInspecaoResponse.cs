@@ -2,13 +2,13 @@
 
 namespace ApiIntegracaoConfitec.Models.Domain.Handler
 {
-    public class BuscaDadosSolicitarInspecaoResponse
+    public class BuscarDadosSolicitarInspecaoResponse
     {
         public DadosInspecao dadosInspecao;
         public bool Success { get; set; }
         public string Message { get; set; }
 
-        public BuscaDadosSolicitarInspecaoResponse(DadosInspecao dadosInspecao)
+        public BuscarDadosSolicitarInspecaoResponse(DadosInspecao dadosInspecao)
         {
             this.dadosInspecao = dadosInspecao;
             if (this.dadosInspecao != null)

@@ -12,21 +12,27 @@ namespace ApiIntegracaoConfitec.Business.Sompo
         private readonly IBuscarDadosSolicitarInspecaoHandler _buscarDadosSolicitarInspecaoHandler;
         private readonly IEnviarSolicitacaoInspecaoConfitecHandler _enviarSolicitacaoInspecaoConfitecHandler;
         private readonly IBuscarDadosAutenticacaoConfitecHandler _buscarDadosAutenticacaoConfitecHandler;
+        private readonly ISolicitarAutenticacaoConfitecHandler _solicitarAutenticacaoConfitecHandler;
+        private readonly IGravarRespostaInspecaoHandler _gravarRespostaInspecaoHandler;
 
         public SolicitarInspecaoHandler(
                 IBuscarDadosSolicitarInspecaoHandler buscarDadosSolicitarInspecaoHandler = null,
                 IEnviarSolicitacaoInspecaoConfitecHandler enviarSolicitacaoInspecaoConfitecHandler = null, 
-                IBuscarDadosAutenticacaoConfitecHandler buscarDadosAutenticacaoConfitecHandler = null)
+                IBuscarDadosAutenticacaoConfitecHandler buscarDadosAutenticacaoConfitecHandler = null,
+                ISolicitarAutenticacaoConfitecHandler solicitarAutenticacaoConfitecHandler = null,
+                IGravarRespostaInspecaoHandler gravarRespostaInspecaoHandler = null)
         {
             this._buscarDadosSolicitarInspecaoHandler = buscarDadosSolicitarInspecaoHandler;
             this._enviarSolicitacaoInspecaoConfitecHandler = enviarSolicitacaoInspecaoConfitecHandler;
             this._buscarDadosAutenticacaoConfitecHandler = buscarDadosAutenticacaoConfitecHandler;
+            this._solicitarAutenticacaoConfitecHandler = solicitarAutenticacaoConfitecHandler;
+            this._gravarRespostaInspecaoHandler = gravarRespostaInspecaoHandler;
         }
 
         public async Task<SolicitarInspecaoResponse> Handle(SolicitarInspecaoRequest command)
         {
 
-            BuscaDadosSolicitarInspecaoResponse buscaDadosSolicitarInspecaoResponse = await this._buscarDadosSolicitarInspecaoHandler.Handle(new BuscaDadosSolicitarInspecaoRequest() { pi = command.PI });
+            BuscarDadosSolicitarInspecaoResponse buscaDadosSolicitarInspecaoResponse = await this._buscarDadosSolicitarInspecaoHandler.Handle(new BuscarDadosSolicitarInspecaoRequest() { pi = command.PI });
 
             //TODO: 1.1: Validar se as informações estão certas
 
@@ -34,19 +40,22 @@ namespace ApiIntegracaoConfitec.Business.Sompo
             BuscarDadosAutenticacaoConfitecResponse buscarDadosAutenticacaoConfitecResponse = await this._buscarDadosAutenticacaoConfitecHandler.Handle();
 
             //TODO: 2.2: Chamar serviço Confitec de Autenticação
+            SolicitarAutenticacaoConfitecRequest solicitarAutenticacaoConfitecRequest = new SolicitarAutenticacaoConfitecRequest(buscarDadosAutenticacaoConfitecResponse.dadosAutenticacao);
+            SolicitarAutenticacaoConfitecResponse solicitarAutenticacaoConfitecResponse = await this._solicitarAutenticacaoConfitecHandler.Handle(solicitarAutenticacaoConfitecRequest);
 
             //TODO: 2.3: Chamar serviço Confitec
-            EnviarSolicitacaoInspecaoConfitecRequest enviarSolicitacaoInspecaoConfitecRequest = new EnviarSolicitacaoInspecaoConfitecRequest(buscaDadosSolicitarInspecaoResponse.dadosInspecao, buscarDadosAutenticacaoConfitecResponse.dadosAutenticacao);
+            EnviarSolicitacaoInspecaoConfitecRequest enviarSolicitacaoInspecaoConfitecRequest = new EnviarSolicitacaoInspecaoConfitecRequest(buscaDadosSolicitarInspecaoResponse.dadosInspecao, solicitarAutenticacaoConfitecResponse.responseToken.access_token);
             EnviarSolicitacaoInspecaoConfitecResponse enviarSolicitacaoInspecaoConfitecResponse =   await this._enviarSolicitacaoInspecaoConfitecHandler.Handle(enviarSolicitacaoInspecaoConfitecRequest);
 
             //TODO: 3: Gravar resultado
-            
+            GravarRespostaInspecaoRequest gravarRespostaInspecaoRequest = new GravarRespostaInspecaoRequest(enviarSolicitacaoInspecaoConfitecResponse.response);
+            GravarRespostaInspecaoResponse gravarRespostaInspecaoResponse = await this._gravarRespostaInspecaoHandler.Handle(gravarRespostaInspecaoRequest);
 
             //TODO: 4: Retornar resultado
 
             return new SolicitarInspecaoResponse
             {
-                Success = true,
+                Success = gravarRespostaInspecaoResponse.success,
                 Message = $"Sucesso" 
             };
         }

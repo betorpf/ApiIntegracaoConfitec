@@ -17,7 +17,7 @@ namespace ApiIntegracaoConfitec.Domain.Handler
 
         public async Task<BuscarDadosAutenticacaoConfitecResponse> Handle()
         {
-            DadosAutenticacao dadosAutenticacao = await this._dadosInspecaoSompoRepository.RetornaDadosAutenticacao();
+            DadosAutenticacao dadosAutenticacao = await this._dadosInspecaoSompoRepository.RetornarDadosAutenticacao();
 
             BuscarDadosAutenticacaoConfitecResponse response = new BuscarDadosAutenticacaoConfitecResponse(dadosAutenticacao);
 

@@ -1,6 +1,6 @@
 ﻿namespace ApiIntegracaoConfitec.Models.Domain.Handler
 {
-    public class BuscaDadosSolicitarInspecaoRequest
+    public class BuscarDadosSolicitarInspecaoRequest
     {
         public int pi { get; set; }
     }

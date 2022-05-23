@@ -25,6 +25,10 @@ namespace ApiIntegracaoConfitec.Services
         //TODO: Implementar
         public async Task<ResponseToken> Autenticacao(RequestToken requestToken)
         {
+            ResponseToken responseTokenTeste = new ResponseToken() { access_token = "asfasd5f4asd6f54as65df46a5sdf465asd4f"};
+            return responseTokenTeste;
+
+
             ResponseToken responseToken = null;
             try
             {
@@ -55,9 +59,9 @@ namespace ApiIntegracaoConfitec.Services
         }
 
         //TODO: Implementar
-        public async Task<ResponseSolicitacaoInspecao> SolicitarInspecao(RequestSolicitacaoInspecao pedidoInspecao)
+        public async Task<ResponseSolicitarInspecao> SolicitarInspecao(RequestSolicitacaoInspecao pedidoInspecao, string access_token = null)
         {
-            ResponseSolicitacaoInspecao responseSolicitacaoInspecao = null;
+            ResponseSolicitarInspecao responseSolicitacaoInspecao = null;
             string confitecResponse = "";
             try
             {
@@ -65,9 +69,9 @@ namespace ApiIntegracaoConfitec.Services
                 {
                     string jsonContent = JsonConvert.SerializeObject(pedidoInspecao);
                     //TODO: AGUARDAR CONFITEC
-                    confitecResponse = await this.GenericPost("/inspecao/pedido/async", jsonContent);
+                    //confitecResponse = await this.GenericPost("/inspecao/pedido/async", jsonContent, access_token);
                     confitecResponse = "{\"numeroInspecao\": 1,\"dataProcessamento\": \"20/05/2022\",\"codigoResultado\": 1,\"mensagemRetorno\": \"\",\"protocoloAbertura\": \"Sucesso\",\"erros\": null}";
-                    responseSolicitacaoInspecao = JsonConvert.DeserializeObject<ResponseSolicitacaoInspecao>(confitecResponse);
+                    responseSolicitacaoInspecao = JsonConvert.DeserializeObject<ResponseSolicitarInspecao>(confitecResponse);
                 }
             }
             catch (System.Exception ex)
@@ -79,13 +83,13 @@ namespace ApiIntegracaoConfitec.Services
         }
 
         //TODO: Implementar
-        public async Task<ResponseCancelamentoInspecao> CancelarInspecao(RequestCancelamentoInspecao requestCancelamentoInspecao)
+        public async Task<ResponseCancelamentoInspecao> CancelarInspecao(RequestCancelamentoInspecao requestCancelamentoInspecao, string access_token = null)
         {
             ResponseCancelamentoInspecao responseCancelamentoInspecao = null;
             try
             {
                 string jsonContent = JsonConvert.SerializeObject(requestCancelamentoInspecao);
-                string confitecResponse = await this.GenericPost("/inspecao/cancelamento/async", jsonContent);
+                string confitecResponse = await this.GenericPost("/inspecao/cancelamento/async", jsonContent, access_token);
                 responseCancelamentoInspecao = JsonConvert.DeserializeObject<ResponseCancelamentoInspecao>(confitecResponse);
             }
             catch (System.Exception)
