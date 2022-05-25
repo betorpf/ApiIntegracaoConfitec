@@ -1,7 +1,9 @@
-﻿using ApiIntegracaoConfitec.Business.Sompo;
+﻿using ApiIntegracaoConfitec.Business.Confitec;
+using ApiIntegracaoConfitec.Business.Sompo;
 using ApiIntegracaoConfitec.Domain.Handler;
 using ApiIntegracaoConfitec.Infrastructure.Connection;
 using ApiIntegracaoConfitec.Infrastructure.Repository;
+using ApiIntegracaoConfitec.Interfaces.Business.Confitec;
 using ApiIntegracaoConfitec.Interfaces.Business.Sompo;
 using ApiIntegracaoConfitec.Interfaces.Domain.Handler;
 using ApiIntegracaoConfitec.Interfaces.Infrastructure.Connection;
@@ -27,6 +29,9 @@ namespace ApiIntegracaoConfitec.Configurations
             services.AddScoped<IBuscarDadosAutenticacaoConfitecHandler, BuscarDadosAutenticacaoConfitecHandler>();
             services.AddScoped<ISolicitarAutenticacaoConfitecHandler, SolicitarAutenticacaoConfitecHandler>();
             services.AddScoped<IGravarRespostaInspecaoHandler, GravarRespostaInspecaoHandler>();
+            services.AddScoped<IDadosLaudoSompoRepository, DadosLaudoSompoRepository>();
+            services.AddScoped<IEnviarRetornoLaudoHandler, EnviarRetornoLaudoHandler>();
+            services.AddScoped<IGravarDadosLaudoHandler, GravarDadosLaudoHandler>();
             #endregion
         }
     }

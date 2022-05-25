@@ -9,20 +9,29 @@ namespace ApiIntegracaoConfitec.Controllers
     [ApiController]
     public class ConfitecController : Controller
     {
-        //POST: api/EnviarRetornoInspecao
-        [Route("EnviarRetornoInspecao")]
+        //POST: api/EnviarRetornoLaudo
+        [Route("EnviarRetornoLaudo")]
         [HttpPost]
         //[Authorize] //TODO: VALIDAR
-        public async Task<ActionResult<InformarDadosInspecaoResponse>> EnviarRetornoInspecao(
-                [FromServices] IInformaDadosInspecaoHandler handler,
-                [FromBody] InformarDadosInspecaoRequest request)
+        public async Task<ActionResult<RetornarDadosLaudoResponse>> EnviarRetornoLaudo(
+                [FromServices] IEnviarRetornoLaudoHandler handler,
+                [FromBody] RetornarDadosLaudoRequest request)
         {
+            RetornarDadosLaudoResponse response = new();
 
-            //TODO: Validar request
-
-            InformarDadosInspecaoResponse response = await handler.Handle(request);
+            try
+            {
+                response = await handler.Handle(request);
+            }
+            catch (System.Exception ex)
+            {
+                response.StatusCode = System.Net.HttpStatusCode.BadRequest;
+                response.Message = ex.Message;
+                return this.BadRequest(response);
+            }
 
             return this.Ok(response);
+
         }
     }
 }

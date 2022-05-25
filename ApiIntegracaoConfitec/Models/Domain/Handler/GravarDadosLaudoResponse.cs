@@ -1,18 +1,18 @@
 ﻿using ApiIntegracaoConfitec.Domain.Utility;
-using ApiIntegracaoConfitec.Models.Confitec;
+using ApiIntegracaoConfitec.Models.Entity;
 
 namespace ApiIntegracaoConfitec.Models.Domain.Handler
 {
-    public class EnviarSolicitacaoInspecaoConfitecResponse
+    public class GravarDadosLaudoResponse
     {
-        public ResponseSolicitarInspecao response;
+        public DadosLaudo dadosLaudo;
         public bool Success { get; set; }
         public string Message { get; set; }
 
-        public EnviarSolicitacaoInspecaoConfitecResponse(ResponseSolicitarInspecao response)
+        public GravarDadosLaudoResponse(DadosLaudo dadosLaudo)
         {
-            this.response = response;
-            this.Message = ValidationUtility.ValidateObject(this.response);
+            this.dadosLaudo = dadosLaudo;
+            this.Message = ValidationUtility.ValidateObject(this.dadosLaudo);
             this.Success = true;
 
             if (!string.IsNullOrEmpty(this.Message))

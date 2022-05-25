@@ -1,10 +1,9 @@
 ﻿using ApiIntegracaoConfitec.Interfaces.Controller;
-using ApiIntegracaoConfitec.Models.Entity;
 using System.Net;
 
-namespace ApiIntegracaoConfitec.Models.Sompo.Controller
+namespace ApiIntegracaoConfitec.Models.Confitec.Controller
 {
-    public class SolicitarInspecaoResponse : IResult
+    public class RetornarDadosLaudoResponse : IResult
     {
         public int NumPI { get; set; }
         public bool Success { get; set; }

@@ -9,5 +9,7 @@ namespace ApiIntegracaoConfitec.Interfaces.Controller
         string Message { get; set; }
         [JsonIgnore]
         HttpStatusCode StatusCode { get; set; }
+
+        
     }
 }

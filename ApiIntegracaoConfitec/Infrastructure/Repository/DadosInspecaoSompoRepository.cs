@@ -36,9 +36,9 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
                     
                     return result.ToList().Count > 0 ? result.ToList()[0] : null;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    throw ex;
+                    throw;
                 }
             }
         }
@@ -62,9 +62,9 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
 
                     return result.ToList().Count > 0 ? result.ToList()[0] : null;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    throw ex;
+                    throw;
                 }
             }
         }
@@ -83,9 +83,9 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
 
                     return result.ToList().Count > 0 ? result.ToList()[0] : null;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    throw ex;
+                    throw;
                 }
             }
         }
@@ -116,9 +116,9 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
 
                     return true;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    throw ex;
+                    throw;
                 }
             }
 
