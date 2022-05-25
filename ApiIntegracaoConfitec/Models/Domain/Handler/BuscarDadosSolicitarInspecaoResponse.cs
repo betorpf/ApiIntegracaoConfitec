@@ -1,4 +1,5 @@
-﻿using ApiIntegracaoConfitec.Models.Entity;
+﻿using ApiIntegracaoConfitec.Domain.Utility;
+using ApiIntegracaoConfitec.Models.Entity;
 
 namespace ApiIntegracaoConfitec.Models.Domain.Handler
 {
@@ -11,9 +12,11 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
         public BuscarDadosSolicitarInspecaoResponse(DadosInspecao dadosInspecao)
         {
             this.dadosInspecao = dadosInspecao;
-            if (this.dadosInspecao != null)
-                this.Success = true;
-        }
+            this.Message = ValidationUtility.ValidateObject(this.dadosInspecao);
+            this.Success = true;
 
+            if (!string.IsNullOrEmpty(this.Message))
+                throw new System.Exception(message: this.Message);
+        }
     }
 }

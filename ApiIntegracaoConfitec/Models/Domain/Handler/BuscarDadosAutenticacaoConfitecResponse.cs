@@ -1,4 +1,7 @@
-﻿using ApiIntegracaoConfitec.Models.Entity;
+﻿using ApiIntegracaoConfitec.Domain.Handler;
+using ApiIntegracaoConfitec.Domain.Utility;
+using ApiIntegracaoConfitec.Models.Entity;
+using System;
 
 namespace ApiIntegracaoConfitec.Models.Domain.Handler
 {
@@ -10,9 +13,13 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
 
         public BuscarDadosAutenticacaoConfitecResponse(DadosAutenticacao dadosAutenticacao)
         {
+
             this.dadosAutenticacao = dadosAutenticacao;
-            if (this.dadosAutenticacao != null)
-                this.Success = true;
+            this.Message = ValidationUtility.ValidateObject(this.dadosAutenticacao);
+            this.Success = true;
+
+            if (!string.IsNullOrEmpty(this.Message))
+                throw new System.Exception(message: this.Message);
         }
     }
 }

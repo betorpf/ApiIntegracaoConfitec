@@ -6,7 +6,7 @@ namespace ApiIntegracaoConfitec.Models.Sompo.Controller
 {
     public class SolicitarInspecaoResponse : IResult
     {
-        public DadosInspecao dadosInspecao { get; set; }
+        public int NumPI { get; set; }
         public bool Success { get; set; }
         public string Message { get; set; }
         public HttpStatusCode StatusCode { get; set; }
