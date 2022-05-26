@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Text.Json.Serialization;
 
 namespace ApiIntegracaoConfitec.Interfaces.Controller
@@ -7,9 +8,8 @@ namespace ApiIntegracaoConfitec.Interfaces.Controller
     {
         bool Success { get; set; }
         string Message { get; set; }
-        [JsonIgnore]
-        HttpStatusCode StatusCode { get; set; }
 
-        
+        [JsonIgnore]
+        HttpStatusCode StatusCode { get; set; }       
     }
 }

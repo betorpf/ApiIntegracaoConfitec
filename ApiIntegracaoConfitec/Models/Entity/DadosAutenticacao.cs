@@ -4,9 +4,10 @@ namespace ApiIntegracaoConfitec.Models.Entity
 {
     public class DadosAutenticacao
     {
-        [Required(ErrorMessage = "Usuário Sompo não informado.")]
+        [Required(ErrorMessage = "Usuário Sompo não informado.", AllowEmptyStrings = false)]
         public string SompoUsername { get; set; }
-        [Required(ErrorMessage = "Password Sompo não informado.")]
+
+        [Required(ErrorMessage = "Password Sompo não informado.", AllowEmptyStrings = false)]
         public string SompoPassword { get; set; }
     }
 }
