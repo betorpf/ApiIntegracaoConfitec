@@ -13,6 +13,6 @@ namespace ApiIntegracaoConfitec.Interfaces.Infrastructure.Repository
         // Gravar laudo
         Task<DadosLaudo> GravarRetornarDadosLaudo(string pi);
         // Cancelar inspeção
-        Task<DadosCancelarInspecao> RetornarDadosCancelarInspecao(string pi);
+        Task<bool> GravarRetornoCancelarInspecao(ResponseCancelarInspecao responseCancelarInspecao);
     }
 }

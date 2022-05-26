@@ -83,14 +83,14 @@ namespace ApiIntegracaoConfitec.Services
         }
 
         //TODO: Implementar
-        public async Task<ResponseCancelamentoInspecao> CancelarInspecao(RequestCancelamentoInspecao requestCancelamentoInspecao, string access_token = null)
+        public async Task<ResponseCancelarInspecao> CancelarInspecao(RequestCancelamentoInspecao requestCancelamentoInspecao, string access_token = null)
         {
-            ResponseCancelamentoInspecao responseCancelamentoInspecao = null;
+            ResponseCancelarInspecao responseCancelamentoInspecao = null;
             try
             {
                 string jsonContent = JsonConvert.SerializeObject(requestCancelamentoInspecao);
                 string confitecResponse = await this.GenericPost("/inspecao/cancelamento/async", jsonContent, access_token);
-                responseCancelamentoInspecao = JsonConvert.DeserializeObject<ResponseCancelamentoInspecao>(confitecResponse);
+                responseCancelamentoInspecao = JsonConvert.DeserializeObject<ResponseCancelarInspecao>(confitecResponse);
             }
             catch (System.Exception)
             {

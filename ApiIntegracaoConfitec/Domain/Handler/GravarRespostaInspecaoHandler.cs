@@ -18,7 +18,7 @@ namespace ApiIntegracaoConfitec.Domain.Handler
         {
             try
             {
-                bool resultado = await this._dadosInspecaoSompoRepository.GravarRetornoSolicitarInspecao(request.responseSolicitacaoInspecao);
+                bool resultado = await this._sompoRepository.GravarRetornoSolicitarInspecao(request.responseSolicitacaoInspecao);
 
                 GravarRespostaInspecaoResponse response = new GravarRespostaInspecaoResponse(resultado, "");
 

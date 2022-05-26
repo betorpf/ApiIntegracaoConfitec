@@ -31,6 +31,8 @@ namespace ApiIntegracaoConfitec.Configurations
             services.AddScoped<IGravarRespostaInspecaoHandler, GravarRespostaInspecaoHandler>();
             services.AddScoped<IEnviarRetornoLaudoHandler, EnviarRetornoLaudoHandler>();
             services.AddScoped<IGravarDadosLaudoHandler, GravarDadosLaudoHandler>();
+            services.AddScoped<IEnviarSolicitacaoCancelamentoConfitecHandler, EnviarSolicitacaoCancelamentoConfitecHandler>();
+            services.AddScoped<IGravarRespostaCancelamentoHandler, GravarRespostaCancelamentoHandler>();
             #endregion
         }
     }

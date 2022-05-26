@@ -126,12 +126,12 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
             }
         }
 
-        // Cancelar inspeção
-        public async Task<DadosCancelarInspecao> RetornarDadosCancelarInspecao(string pi)
+        // Cancelar inspeção 
+        public async Task<bool> GravarRetornoCancelarInspecao(ResponseCancelarInspecao responseCancelarInspecao)
         {
             var parameters = new DynamicParameters(new
             {
-                NUM_PI = pi
+                NUM_PI = responseCancelarInspecao.numeroInspecao
             });
 
             var sql = $@"EXEC sp_busca_dados_cancelar_pi @NUM_PI";
@@ -141,16 +141,16 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
                 connectionDb.Open();
                 try
                 {
+                    var result = await connectionDb.QueryAsync<DadosAutenticacao>(sql, parameters);
 
-                    var result = await connectionDb.QueryAsync<DadosCancelarInspecao>(sql, parameters);
-
-                    return result.ToList().Count > 0 ? result.ToList()[0] : null;
+                    return true;
                 }
                 catch (Exception)
                 {
                     throw;
                 }
             }
+
         }
     }
 }
