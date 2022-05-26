@@ -8,16 +8,16 @@ namespace ApiIntegracaoConfitec.Domain.Handler
 {
     public class BuscarDadosAutenticacaoConfitecHandler : IBuscarDadosAutenticacaoConfitecHandler
     {
-        private readonly IDadosInspecaoSompoRepository _dadosInspecaoSompoRepository;
+        private readonly ISompoRepository _sompoRepository;
 
-        public BuscarDadosAutenticacaoConfitecHandler(IDadosInspecaoSompoRepository dadosInspecaoSompoRepository)
+        public BuscarDadosAutenticacaoConfitecHandler(ISompoRepository sompoRepository)
         {
-            this._dadosInspecaoSompoRepository = dadosInspecaoSompoRepository;
+            this._sompoRepository = sompoRepository;
         }
 
         public async Task<BuscarDadosAutenticacaoConfitecResponse> Handle()
         {
-            DadosAutenticacao dadosAutenticacao = await this._dadosInspecaoSompoRepository.RetornarDadosAutenticacao();
+            DadosAutenticacao dadosAutenticacao = await this._sompoRepository.RetornarDadosAutenticacao();
 
             BuscarDadosAutenticacaoConfitecResponse response = new BuscarDadosAutenticacaoConfitecResponse(dadosAutenticacao);
 

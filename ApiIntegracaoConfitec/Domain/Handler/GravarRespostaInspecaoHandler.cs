@@ -7,16 +7,16 @@ namespace ApiIntegracaoConfitec.Domain.Handler
 {
     public class GravarRespostaInspecaoHandler : IGravarRespostaInspecaoHandler
     {
-        private readonly IDadosInspecaoSompoRepository _dadosInspecaoSompoRepository;
+        private readonly ISompoRepository _sompoRepository;
 
-        public GravarRespostaInspecaoHandler(IDadosInspecaoSompoRepository dadosInspecaoSompoRepository)
+        public GravarRespostaInspecaoHandler(ISompoRepository sompoRepository)
         {
-            this._dadosInspecaoSompoRepository = dadosInspecaoSompoRepository;
+            this._sompoRepository = sompoRepository;
         }
 
         public async Task<GravarRespostaInspecaoResponse> Handle(GravarRespostaInspecaoRequest request)
         {
-            bool resultado = await this._dadosInspecaoSompoRepository.GravarRetornoSolicitarInspecao(request.responseSolicitacaoInspecao);
+            bool resultado = await this._sompoRepository.GravarRetornoSolicitarInspecao(request.responseSolicitacaoInspecao);
 
             GravarRespostaInspecaoResponse response = new GravarRespostaInspecaoResponse(resultado);
 

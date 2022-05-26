@@ -24,12 +24,11 @@ namespace ApiIntegracaoConfitec.Configurations
             services.AddScoped<IBuscarDadosSolicitarInspecaoHandler, BuscarDadosSolicitarInspecaoHandler>();
             services.AddScoped<ICancelarInspecaoHandler, CancelarInspecaoHandler>();
             services.AddScoped<ISQLConnectionDefault, SqlConnectionDefault>();
-            services.AddScoped<IDadosInspecaoSompoRepository, DadosInspecaoSompoRepository>();
+            services.AddScoped<ISompoRepository, SompoRepository>();
             services.AddScoped<IEnviarSolicitacaoInspecaoConfitecHandler, EnviarSolicitacaoInspecaoConfitecHandler>();
             services.AddScoped<IBuscarDadosAutenticacaoConfitecHandler, BuscarDadosAutenticacaoConfitecHandler>();
             services.AddScoped<ISolicitarAutenticacaoConfitecHandler, SolicitarAutenticacaoConfitecHandler>();
             services.AddScoped<IGravarRespostaInspecaoHandler, GravarRespostaInspecaoHandler>();
-            services.AddScoped<IDadosLaudoSompoRepository, DadosLaudoSompoRepository>();
             services.AddScoped<IEnviarRetornoLaudoHandler, EnviarRetornoLaudoHandler>();
             services.AddScoped<IGravarDadosLaudoHandler, GravarDadosLaudoHandler>();
             #endregion

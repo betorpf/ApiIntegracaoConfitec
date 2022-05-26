@@ -8,16 +8,16 @@ namespace ApiIntegracaoConfitec.Domain.Handler
 {
     public class GravarDadosLaudoHandler : IGravarDadosLaudoHandler
     {
-        private readonly IDadosLaudoSompoRepository _dadosLaudoSompoRepository;
+        private readonly ISompoRepository _sompoRepository;
 
-        public GravarDadosLaudoHandler(IDadosLaudoSompoRepository dadosLaudoSompoRepository)
+        public GravarDadosLaudoHandler(ISompoRepository sompoRepository)
         {
-            this._dadosLaudoSompoRepository = dadosLaudoSompoRepository;
+            this._sompoRepository = sompoRepository;
         }
 
         public async Task<GravarDadosLaudoResponse> Handle(GravarDadosLaudoRequest request)
         {
-            DadosLaudo dadosLaudo = await this._dadosLaudoSompoRepository.RetornarDadosLaudo(request.pi.ToString());
+            DadosLaudo dadosLaudo = await this._sompoRepository.GravarRetornarDadosLaudo(request.pi.ToString());
 
             GravarDadosLaudoResponse response = new GravarDadosLaudoResponse(dadosLaudo);
 
