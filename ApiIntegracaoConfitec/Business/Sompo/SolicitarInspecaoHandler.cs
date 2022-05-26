@@ -32,16 +32,11 @@ namespace ApiIntegracaoConfitec.Business.Sompo
 
         public async Task<SolicitarInspecaoResponse> Handle(SolicitarInspecaoRequest solicitarInspecaoRequest)
         {
-
-            SolicitarInspecaoResponse solicitarInspecaoResponse =  new SolicitarInspecaoResponse
-                                                                    {
-                                                                        Success = false,
-                                                                        Message = $"",
-                                                                        NumPI = solicitarInspecaoRequest.PI
-                                                                    };
+            //Cria Response com o NumPI Informado
+            SolicitarInspecaoResponse solicitarInspecaoResponse =  new SolicitarInspecaoResponse(solicitarInspecaoRequest.PI);
+            
             //Buscar Dados da autenticação
             BuscarDadosAutenticacaoConfitecResponse buscarDadosAutenticacaoConfitecResponse = await this._buscarDadosAutenticacaoConfitecHandler.Handle();
-
 
             //Buscar Dados para Solicitar a Inspeção
             BuscarDadosSolicitarInspecaoResponse buscaDadosSolicitarInspecaoResponse = await this._buscarDadosSolicitarInspecaoHandler.Handle(new BuscarDadosSolicitarInspecaoRequest() { pi = solicitarInspecaoRequest.PI });
@@ -59,13 +54,9 @@ namespace ApiIntegracaoConfitec.Business.Sompo
             GravarRespostaInspecaoResponse gravarRespostaInspecaoResponse = await this._gravarRespostaInspecaoHandler.Handle(gravarRespostaInspecaoRequest);
 
             //TODO: 4: Retornar resultado
-
-            return new SolicitarInspecaoResponse
-            {
-                Success = gravarRespostaInspecaoResponse.success,
-                Message = $"Sucesso",
-                NumPI = solicitarInspecaoRequest.PI
-            };
+            solicitarInspecaoResponse.Success = gravarRespostaInspecaoResponse.Success;
+            solicitarInspecaoResponse.Message = gravarRespostaInspecaoResponse.Message;
+            return solicitarInspecaoResponse;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using ApiIntegracaoConfitec.Interfaces.Business.Sompo;
+﻿using ApiIntegracaoConfitec.Domain.Utility;
+using ApiIntegracaoConfitec.Interfaces.Business.Sompo;
+using ApiIntegracaoConfitec.Interfaces.Controller;
 using ApiIntegracaoConfitec.Models.Sompo.Controller;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -13,25 +15,25 @@ namespace ApiIntegracaoConfitec.Controllers
         [Route("SolicitarInspecao")]
         [HttpPost]
         //[Authorize] //TODO: VALIDAR
-        public async Task<ActionResult<SolicitarInspecaoResponse>> SolicitarInspecao(
+        public async Task<ActionResult<IResult>> SolicitarInspecao(
                 [FromServices] ISolicitarInspecaoHandler handler,
                 [FromBody] SolicitarInspecaoRequest request)
         {
-            SolicitarInspecaoResponse response = new();
-
             try
             {
-                response = await handler.Handle(request);
+                SolicitarInspecaoResponse response = await handler.Handle(request);
+                return this.Ok(response);
             }
             catch (System.Exception ex)
             {
-                response.StatusCode = System.Net.HttpStatusCode.BadRequest;
-                response.Message = ex.Message;
-                return this.BadRequest(response);
+                return this.BadRequest(new SolicitarInspecaoResponse()
+                {
+                    NumPI = request.PI,
+                    StatusCode = System.Net.HttpStatusCode.BadRequest,
+                    Message = ex.Message,
+                    Success = false
+                }); ;
             }
-
-            return this.Ok(response);
-
         }
 
         //POST: api/CancelarInspecao
@@ -43,10 +45,22 @@ namespace ApiIntegracaoConfitec.Controllers
                 [FromBody] CancelarInspecaoRequest request)
         {
             //TODO: Validar request
+            try
+            {
+                CancelarInspecaoResponse response = await handler.Handle(request);
+                return this.Ok(response);
+            }
+            catch (System.Exception ex)
+            {
+                return this.BadRequest(new CancelarInspecaoResponse()
+                {
+                    NumPI = request.PI,
+                    StatusCode = System.Net.HttpStatusCode.BadRequest,
+                    Message = ex.Message,
+                    Success = false
+                });
+            }
 
-            CancelarInspecaoResponse response = await handler.Handle(request);
-
-            return this.Ok(response);
         }
 
 

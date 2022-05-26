@@ -2,10 +2,12 @@
 {
     public class GravarRespostaInspecaoResponse
     {
-        public bool success { get; set; }
-        public GravarRespostaInspecaoResponse(bool success)
+        public bool Success { get; set; }
+        public string Message { get; set; }
+        public GravarRespostaInspecaoResponse(bool Success, string message)
         {
-            this.success = success;
+            this.Success = Success;
+            this.Message = message;
         }
     }
 }
