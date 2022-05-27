@@ -1,4 +1,6 @@
-﻿using ApiIntegracaoConfitec.Models.Confitec;
+﻿using ApiIntegracaoConfitec.Domain.Utility;
+using ApiIntegracaoConfitec.Helpers;
+using ApiIntegracaoConfitec.Models.Confitec;
 using ApiIntegracaoConfitec.Models.Entity;
 
 namespace ApiIntegracaoConfitec.Models.Domain.Handler
@@ -16,9 +18,13 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
         {
             this.dadosInspecao = dadosInspecao;
             this.access_token = access_token;
-            if (dadosInspecao != null && access_token != null)
-                this.Success = true;
-            
+
+            var ListaValidacao = ValidationUtility.ListValidateObject(this.dadosInspecao);
+            if (ListaValidacao.Count > 0)
+            {
+                throw new BRQValidationException("Validação de dados da inspeção selecionada.", ListaValidacao);
+            }
+
         }
     }
 }

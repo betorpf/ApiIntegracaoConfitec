@@ -1,4 +1,5 @@
 ﻿using ApiIntegracaoConfitec.Domain.Utility;
+using ApiIntegracaoConfitec.Helpers;
 using ApiIntegracaoConfitec.Models.Confitec;
 
 namespace ApiIntegracaoConfitec.Models.Domain.Handler
@@ -12,11 +13,11 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
         public EnviarSolicitacaoCancelamentoConfitecResponse(ResponseCancelarInspecao response)
         {
             this.response = response;
-            this.Message = ValidationUtility.ValidateObject(this.response);
-            this.Success = true;
-
-            if (!string.IsNullOrEmpty(this.Message))
-                throw new System.Exception(message: this.Message);
+            var ListaValidacao = ValidationUtility.ListValidateObject(this.response);
+            if (ListaValidacao.Count > 0)
+            {
+                throw new BRQValidationException("Validação de dados retornados da Confitec", ListaValidacao);
+            }
         }
     }
 }

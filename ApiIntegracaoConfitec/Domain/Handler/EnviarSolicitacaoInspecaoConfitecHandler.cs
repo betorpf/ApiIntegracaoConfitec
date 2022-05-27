@@ -19,7 +19,7 @@ namespace ApiIntegracaoConfitec.Domain.Handler
         {
             RequestSolicitacaoInspecao requestSolicitacaoInspecao = new RequestSolicitacaoInspecao(request.dadosInspecao);
 
-            ResponseSolicitarInspecao response = await this._confitecService.SolicitarInspecao(requestSolicitacaoInspecao, request.access_token);
+            ConfitecSolicitarInspecao response = await this._confitecService.SolicitarInspecao(requestSolicitacaoInspecao, request.access_token);
             
             return new EnviarSolicitacaoInspecaoConfitecResponse(response);
         }

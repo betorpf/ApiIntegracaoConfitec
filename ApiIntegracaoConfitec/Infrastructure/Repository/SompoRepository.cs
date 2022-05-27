@@ -65,7 +65,7 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
             }
         }
 
-        public async Task<bool> GravarRetornoSolicitarInspecao(ResponseSolicitarInspecao responseSolicitarInspecao)
+        public async Task<bool> GravarRetornoSolicitarInspecao(ConfitecSolicitarInspecao responseSolicitarInspecao)
         {
 
             var parameters = new DynamicParameters(new

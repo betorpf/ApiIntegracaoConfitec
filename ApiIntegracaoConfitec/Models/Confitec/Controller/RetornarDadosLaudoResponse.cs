@@ -4,7 +4,7 @@ using System.Net;
 
 namespace ApiIntegracaoConfitec.Models.Confitec.Controller
 {
-    public class RetornarDadosLaudoResponse : IResult
+    public class RetornarDadosLaudoResponse : IResultHttpResponse
     {
         public int NumPI { get; set; }
         public bool Success { get; set; }

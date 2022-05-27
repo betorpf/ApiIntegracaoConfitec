@@ -22,8 +22,6 @@ namespace ApiIntegracaoConfitec.Business.Confitec
 
             return new RetornarDadosLaudoResponse
             {
-                Success = informarDadosLaudoResponse.Success,
-                Message = $"Sucesso",
                 NumPI = command.PI
             };
 

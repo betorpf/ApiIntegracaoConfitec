@@ -15,56 +15,25 @@ namespace ApiIntegracaoConfitec.Controllers
         [Route("SolicitarInspecao")]
         [HttpPost]
         //[Authorize] //TODO: VALIDAR
-        public async Task<ActionResult<IResult>> SolicitarInspecao(
+        public async Task<ActionResult<IResultHttpResponse>> SolicitarInspecao(
                 [FromServices] ISolicitarInspecaoHandler handler,
                 [FromBody] SolicitarInspecaoRequest request)
         {
-
-            SolicitarInspecaoResponse response = await handler.Handle(request);
+            SolicitarInspecaoHttpResponse response = await handler.Handle(request);
             return this.Ok(response);
-            //try
-            //{
-
-            //}
-            //catch (System.Exception ex)
-            //{
-            //    return this.BadRequest(new SolicitarInspecaoResponse()
-            //    {
-            //        NumPI = request.PI,
-            //        StatusCode = System.Net.HttpStatusCode.BadRequest,
-            //        Message = ex.Message,
-            //        Success = false
-            //    }); ;
-            //}
         }
 
         //POST: api/CancelarInspecao
         [Route("CancelarInspecao")]
         [HttpPost]
         //[Authorize] //TODO: VALIDAR
-        public async Task<ActionResult<CancelarInspecaoResponse>> CancelarInspecao(
+        public async Task<ActionResult<IResultHttpResponse>> CancelarInspecao(
                 [FromServices] ICancelarInspecaoHandler handler,
                 [FromBody] CancelarInspecaoRequest request)
         {
-            //TODO: Validar request
-            try
-            {
+            
                 CancelarInspecaoResponse response = await handler.Handle(request);
                 return this.Ok(response);
-            }
-            catch (System.Exception ex)
-            {
-                return this.BadRequest(new CancelarInspecaoResponse()
-                {
-                    NumPI = request.PI,
-                    StatusCode = System.Net.HttpStatusCode.BadRequest,
-                    Message = ex.Message,
-                    Success = false
-                });
-            }
-
         }
-
-
     }
 }

@@ -4,7 +4,7 @@ using System.Net;
 
 namespace ApiIntegracaoConfitec.Models.Confitec.Controller
 {
-    public class InformarDadosInspecaoResponse : IResult
+    public class InformarDadosInspecaoResponse
     {
         public bool Success { get ; set ; }
         public string Message { get; set; }

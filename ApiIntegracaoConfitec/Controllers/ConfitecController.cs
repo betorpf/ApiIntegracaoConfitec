@@ -1,4 +1,5 @@
 ﻿using ApiIntegracaoConfitec.Interfaces.Business.Confitec;
+using ApiIntegracaoConfitec.Interfaces.Controller;
 using ApiIntegracaoConfitec.Models.Confitec.Controller;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace ApiIntegracaoConfitec.Controllers
         [Route("EnviarRetornoLaudo")]
         [HttpPost]
         //[Authorize] //TODO: VALIDAR
-        public async Task<ActionResult<RetornarDadosLaudoResponse>> EnviarRetornoLaudo(
+        public async Task<ActionResult<IResultHttpResponse>> EnviarRetornoLaudo(
                 [FromServices] IEnviarRetornoLaudoHandler handler,
                 [FromBody] RetornarDadosLaudoRequest request)
         {

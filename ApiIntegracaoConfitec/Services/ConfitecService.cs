@@ -59,9 +59,9 @@ namespace ApiIntegracaoConfitec.Services
         }
 
         //TODO: Implementar
-        public async Task<ResponseSolicitarInspecao> SolicitarInspecao(RequestSolicitacaoInspecao pedidoInspecao, string access_token = null)
+        public async Task<ConfitecSolicitarInspecao> SolicitarInspecao(RequestSolicitacaoInspecao pedidoInspecao, string access_token = null)
         {
-            ResponseSolicitarInspecao responseSolicitacaoInspecao = null;
+            ConfitecSolicitarInspecao responseSolicitacaoInspecao = null;
             string confitecResponse = "";
             try
             {
@@ -71,7 +71,7 @@ namespace ApiIntegracaoConfitec.Services
                     //TODO: AGUARDAR CONFITEC
                     //confitecResponse = await this.GenericPost("/inspecao/pedido/async", jsonContent, access_token);
                     confitecResponse = "{\"numeroInspecao\": 1,\"dataProcessamento\": \"20/05/2022\",\"codigoResultado\": 1,\"mensagemRetorno\": \"\",\"protocoloAbertura\": \"Sucesso\",\"erros\": null}";
-                    responseSolicitacaoInspecao = JsonConvert.DeserializeObject<ResponseSolicitarInspecao>(confitecResponse);
+                    responseSolicitacaoInspecao = JsonConvert.DeserializeObject<ConfitecSolicitarInspecao>(confitecResponse);
                 }
             }
             catch (System.Exception ex)

@@ -7,7 +7,8 @@ namespace ApiIntegracaoConfitec.Helpers
 {
     public class BRQValidationException : Exception
     {
-        public List<string> listValidationResult;
+        public List<string> listValidationResult { get; set; }
+
         public BRQValidationException() : base()
         {
 
@@ -21,8 +22,7 @@ namespace ApiIntegracaoConfitec.Helpers
         public BRQValidationException(string message, params object[] args) 
             : base(String.Format(CultureInfo.CurrentCulture, message, args))
         {
-            listValidationResult = (List<String>)args[0];
+            this.listValidationResult = (List<String>)args[0];
         }
-
     }
 }

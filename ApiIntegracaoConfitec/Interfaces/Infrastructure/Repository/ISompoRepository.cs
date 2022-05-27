@@ -9,7 +9,7 @@ namespace ApiIntegracaoConfitec.Interfaces.Infrastructure.Repository
         // Solicitar inspeção
         Task<DadosInspecao> RetornarDadosInspecao(string pi);
         Task<DadosAutenticacao> RetornarDadosAutenticacao();
-        Task<bool> GravarRetornoSolicitarInspecao(ResponseSolicitarInspecao responseSolicitarInspecao);
+        Task<bool> GravarRetornoSolicitarInspecao(ConfitecSolicitarInspecao responseSolicitarInspecao);
         // Gravar laudo
         Task<DadosLaudo> GravarRetornarDadosLaudo(string pi);
         // Cancelar inspeção
