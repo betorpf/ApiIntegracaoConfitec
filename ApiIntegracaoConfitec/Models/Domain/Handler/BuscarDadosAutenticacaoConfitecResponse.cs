@@ -1,5 +1,6 @@
 ﻿using ApiIntegracaoConfitec.Domain.Handler;
 using ApiIntegracaoConfitec.Domain.Utility;
+using ApiIntegracaoConfitec.Helpers;
 using ApiIntegracaoConfitec.Models.Entity;
 using System;
 
@@ -18,8 +19,15 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
             this.Message = ValidationUtility.ValidateObject(this.dadosAutenticacao);
             this.Success = true;
 
-            if (!string.IsNullOrEmpty(this.Message))
-                throw new System.Exception(message: this.Message);
+            //if (!string.IsNullOrEmpty(this.Message))
+            //    throw new System.Exception(message: this.Message);
+
+
+            var ListaValidacao = ValidationUtility.ListValidateObject(this.dadosAutenticacao);
+            if(ListaValidacao.Count > 0)
+            {
+                throw new BRQValidationException("Erro na validação dos dados de Autenticação Confitec", ListaValidacao);
+            }
         }
     }
 }

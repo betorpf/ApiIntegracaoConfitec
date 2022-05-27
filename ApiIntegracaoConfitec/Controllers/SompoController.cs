@@ -19,21 +19,23 @@ namespace ApiIntegracaoConfitec.Controllers
                 [FromServices] ISolicitarInspecaoHandler handler,
                 [FromBody] SolicitarInspecaoRequest request)
         {
-            try
-            {
-                SolicitarInspecaoResponse response = await handler.Handle(request);
-                return this.Ok(response);
-            }
-            catch (System.Exception ex)
-            {
-                return this.BadRequest(new SolicitarInspecaoResponse()
-                {
-                    NumPI = request.PI,
-                    StatusCode = System.Net.HttpStatusCode.BadRequest,
-                    Message = ex.Message,
-                    Success = false
-                }); ;
-            }
+
+            SolicitarInspecaoResponse response = await handler.Handle(request);
+            return this.Ok(response);
+            //try
+            //{
+
+            //}
+            //catch (System.Exception ex)
+            //{
+            //    return this.BadRequest(new SolicitarInspecaoResponse()
+            //    {
+            //        NumPI = request.PI,
+            //        StatusCode = System.Net.HttpStatusCode.BadRequest,
+            //        Message = ex.Message,
+            //        Success = false
+            //    }); ;
+            //}
         }
 
         //POST: api/CancelarInspecao

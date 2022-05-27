@@ -1,4 +1,5 @@
 using ApiIntegracaoConfitec.Configurations;
+using ApiIntegracaoConfitec.Helpers;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -46,6 +47,8 @@ namespace prjApiIntegracaoConfitec
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

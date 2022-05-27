@@ -1,6 +1,7 @@
 ﻿using ApiIntegracaoConfitec.Domain.Utility;
 using ApiIntegracaoConfitec.Interfaces.Controller;
 using ApiIntegracaoConfitec.Models.Entity;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 
@@ -14,6 +15,8 @@ namespace ApiIntegracaoConfitec.Models.Sompo.Controller
         public bool Success { get; set; }
         public string Message { get; set; }
         public HttpStatusCode StatusCode { get; set; }
+        public List<string> Errors { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
         public CancelarInspecaoResponse()
         {
 

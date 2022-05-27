@@ -15,6 +15,8 @@ namespace ApiIntegracaoConfitec.Models.Sompo.Controller
         public bool Success { get; set; }
         public string Message { get; set; }
         public HttpStatusCode StatusCode { get; set; }
+        public List<string> Errors { get; set; }
+
         public SolicitarInspecaoResponse()
         {
 
@@ -25,8 +27,8 @@ namespace ApiIntegracaoConfitec.Models.Sompo.Controller
             this.Message = ValidationUtility.ValidateObject(this);
             this.Success = true;
 
-            if (!string.IsNullOrEmpty(this.Message))
-                throw new System.Exception(message: this.Message);
+            //if (!string.IsNullOrEmpty(this.Message))
+            //    throw new System.Exception(message: this.Message);
 
         }
     }

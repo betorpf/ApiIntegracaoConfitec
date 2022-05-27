@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace ApiIntegracaoConfitec.Domain.Utility
 {
@@ -13,5 +14,14 @@ namespace ApiIntegracaoConfitec.Domain.Utility
             Validator.TryValidateObject(obj, contexto, resultadoValidacao, true);
             return String.Join("|", resultadoValidacao);
         }
+
+        public static List<string> ListValidateObject(object obj)
+        {
+            var resultadoValidacao = new List<ValidationResult>();
+            var contexto = new ValidationContext(obj, null, null);
+            Validator.TryValidateObject(obj, contexto, resultadoValidacao, true);
+            return resultadoValidacao.Select(x => x.ToString()).ToList();
+        }
+
     }
 }
