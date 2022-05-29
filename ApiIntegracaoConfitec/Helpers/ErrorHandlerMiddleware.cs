@@ -41,6 +41,7 @@ namespace ApiIntegracaoConfitec.Helpers
 
                     default:
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        defaultResponse.Message = error.Message;
                         break;
                 }
 

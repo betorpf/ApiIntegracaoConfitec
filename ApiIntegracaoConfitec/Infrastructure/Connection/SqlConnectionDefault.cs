@@ -16,7 +16,7 @@ namespace ApiIntegracaoConfitec.Infrastructure.Connection
         public IDbConnection Connection()
         {
             //TODO: ambiente-config.GetAmbiente();
-            var connectionStringConfig = this._config.GetConnectionString("DevConnection");
+            var connectionStringConfig = this._config.GetConnectionString("DefaultConnection");
             var connectionString = string.Empty;
 
             if (connectionStringConfig.Contains("Token"))

@@ -1,10 +1,7 @@
-﻿using ApiIntegracaoConfitec.Domain.Handler;
-using ApiIntegracaoConfitec.Interfaces.Business.Sompo;
-using ApiIntegracaoConfitec.Interfaces.Controller;
+﻿using ApiIntegracaoConfitec.Interfaces.Business.Sompo;
 using ApiIntegracaoConfitec.Interfaces.Domain.Handler;
 using ApiIntegracaoConfitec.Models.Domain.Handler;
 using ApiIntegracaoConfitec.Models.Sompo.Controller;
-using System;
 using System.Threading.Tasks;
 
 namespace ApiIntegracaoConfitec.Business.Sompo
