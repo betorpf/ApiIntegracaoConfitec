@@ -1,5 +1,6 @@
 ﻿using ApiIntegracaoConfitec.Interfaces.Business.Confitec;
 using ApiIntegracaoConfitec.Interfaces.Controller;
+using ApiIntegracaoConfitec.Models.Confitec;
 using ApiIntegracaoConfitec.Models.Confitec.Controller;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -33,6 +34,19 @@ namespace ApiIntegracaoConfitec.Controllers
 
             return this.Ok(response);
 
+        }
+
+        
+
+        [Route("SolicitarInspecao")]
+        [HttpPost]
+        public async Task<ActionResult<IResultHttpResponse>> EnviarResultadoInspecao(
+                [FromServices] IEnviarRetornoLaudoHandler handler,
+                [FromBody] ResultadoInspecaoRequest request)
+        {
+            //TODO Revisar
+            RetornarDadosLaudoResponse response = await handler.Handle(null);
+            return this.Ok(response);
         }
     }
 }
