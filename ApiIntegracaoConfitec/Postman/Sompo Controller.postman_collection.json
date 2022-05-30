@@ -1,0 +1,62 @@
+{
+	"info": {
+		"_postman_id": "87586e35-b57f-4b62-b9f6-6917ee46b60d",
+		"name": "Sompo Controller",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17188008"
+	},
+	"item": [
+		{
+			"name": "SolicitarInspecao",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Bearer_iRisk}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{UrlApiBRQ}}/Sompo/SolicitarInspecao",
+					"host": [
+						"{{UrlApiBRQ}}"
+					],
+					"path": [
+						"Sompo",
+						"SolicitarInspecao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CancelarInspecao",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Bearer_iRisk}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{UrlApiBRQ}}/Sompo/CancelarInspecao",
+					"host": [
+						"{{UrlApiBRQ}}"
+					],
+					"path": [
+						"Sompo",
+						"CancelarInspecao"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
