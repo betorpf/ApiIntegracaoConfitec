@@ -5,7 +5,7 @@ namespace ApiIntegracaoConfitec.Interfaces.Business.Sompo
 {
     public interface ICancelarInspecaoHandler
     {
-        Task<CancelarInspecaoResponse> Handle(CancelarInspecaoRequest command);
+        Task<CancelarInspecaoHttpResponse> Handle(CancelarInspecaoRequest command);
     }
     
 }

@@ -1,7 +1,15 @@
-﻿namespace ApiIntegracaoConfitec.Models.Domain.Handler
+﻿using ApiIntegracaoConfitec.Models.Confitec;
+using ApiIntegracaoConfitec.Models.Confitec.Controller;
+
+namespace ApiIntegracaoConfitec.Models.Domain.Handler
 {
-    public class GravarDadosLaudoRequest
+    public class gravarDadosLaudoRequest
     {
-        public int pi { get; set; }
+        public ResultadoInspecaoRequest resultadoInspecaoRequest { get; set; }
+
+        public gravarDadosLaudoRequest(ResultadoInspecaoRequest resultadoInspecaoRequest)
+        {
+            this.resultadoInspecaoRequest = resultadoInspecaoRequest;
+        }
     }
 }

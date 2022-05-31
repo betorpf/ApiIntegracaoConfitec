@@ -25,10 +25,10 @@ namespace ApiIntegracaoConfitec.Business.Sompo
             this._gravarRespostaCancelamentoHandler = gravarRespostaCancelamentoHandler;
         }
 
-        public async Task<CancelarInspecaoResponse> Handle(CancelarInspecaoRequest cancelarInspecaoRequest)
+        public async Task<CancelarInspecaoHttpResponse> Handle(CancelarInspecaoRequest cancelarInspecaoRequest)
         {
             //Cria Response com o NumPI Informado
-            CancelarInspecaoResponse cancelarInspecaoResponse = new CancelarInspecaoResponse(cancelarInspecaoRequest.PI);
+            CancelarInspecaoHttpResponse cancelarInspecaoResponse = new CancelarInspecaoHttpResponse(cancelarInspecaoRequest.PI);
 
             //Buscar Dados da autenticação
             BuscarDadosAutenticacaoConfitecResponse buscarDadosAutenticacaoConfitecResponse = await this._buscarDadosAutenticacaoConfitecHandler.Handle();

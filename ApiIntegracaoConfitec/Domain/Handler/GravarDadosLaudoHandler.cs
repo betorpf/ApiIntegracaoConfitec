@@ -1,5 +1,6 @@
 ﻿using ApiIntegracaoConfitec.Interfaces.Domain.Handler;
 using ApiIntegracaoConfitec.Interfaces.Infrastructure.Repository;
+using ApiIntegracaoConfitec.Models.Confitec;
 using ApiIntegracaoConfitec.Models.Domain.Handler;
 using ApiIntegracaoConfitec.Models.Entity;
 using System.Threading.Tasks;
@@ -15,13 +16,14 @@ namespace ApiIntegracaoConfitec.Domain.Handler
             this._sompoRepository = sompoRepository;
         }
 
-        public async Task<GravarDadosLaudoResponse> Handle(GravarDadosLaudoRequest request)
+        public async Task<GravarDadosLaudoResponse> Handle(ResultadoInspecaoRequest request)
         {
-            DadosLaudo dadosLaudo = await this._sompoRepository.GravarRetornarDadosLaudo(request.pi.ToString());
+            DadosLaudo dadosLaudo = await this._sompoRepository.GravarRetornarDadosLaudo(request);
 
             GravarDadosLaudoResponse response = new GravarDadosLaudoResponse(dadosLaudo);
 
             return response;
         }
+
     }
 }

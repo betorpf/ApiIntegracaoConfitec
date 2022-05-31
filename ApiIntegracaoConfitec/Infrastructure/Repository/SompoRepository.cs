@@ -1,4 +1,5 @@
-﻿using ApiIntegracaoConfitec.Interfaces.Infrastructure.Connection;
+﻿using ApiIntegracaoConfitec.Helpers;
+using ApiIntegracaoConfitec.Interfaces.Infrastructure.Connection;
 using ApiIntegracaoConfitec.Interfaces.Infrastructure.Repository;
 using ApiIntegracaoConfitec.Models.Confitec;
 using ApiIntegracaoConfitec.Models.Entity;
@@ -37,9 +38,9 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
                     
                     return result.ToList().Count > 0 ? result.ToList()[0] : null;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
+                    throw new CommunicationException("Ocorreu um erro ao acessar a base. Método: SompoRepository.RetornarDadosInspecao - Erro: " + ex.Message);
                 }
             }
         }
@@ -58,9 +59,9 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
 
                     return result.ToList().Count > 0 ? result.ToList()[0] : null;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
+                    throw new CommunicationException("Ocorreu um erro ao acessar a base. Método: SompoRepository.RetornarDadosAutenticacao - Erro: " + ex.Message);
                 }
             }
         }
@@ -75,9 +76,8 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
                 codigo_resultado = responseSolicitarInspecao.codigoResultado,
                 mensagem_retorno = responseSolicitarInspecao.mensagemRetorno,
                 protocolo_abertura = responseSolicitarInspecao.protocoloAbertura,
-                lista_erros = responseSolicitarInspecao.erros.ToString() //TODO: Implementar o tostring
-            }); ;
-
+                lista_erros = responseSolicitarInspecao.erros is null ? null : String.Join("|", responseSolicitarInspecao.erros)
+            });
 
             var sql = $@"EXEC sp_brq_gravar_retorno_solicitar_inspecao @numero_inspecao, @data_processamento, @codigo_resultado, @mensagem_retorno, @protocolo_abertura, @lista_erros";
 
@@ -91,20 +91,22 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
 
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
+                    throw new CommunicationException("Ocorreu um erro ao acessar a base. Método: SompoRepository.GravarRetornoSolicitarInspecao - Erro: " + ex.Message);
                 }
             }
 
         }
 
         // Gravar laudo
-        public async Task<DadosLaudo> GravarRetornarDadosLaudo(string pi)
+        public async Task<DadosLaudo> GravarRetornarDadosLaudo(ResultadoInspecaoRequest resultadoInspecao)
         {
+            //TODO: VALIDAR OS CAMPOS QUE DEVEM SER GRAVADOS
+            //TODO: CRIAR PROCEDURE COM OS CAMPOS DO RETORNO
             var parameters = new DynamicParameters(new
             {
-                NUM_PI = pi
+                NUM_PI = resultadoInspecao.numeroSolicitacaoInspecao
             });
 
             var sql = $@"EXEC sp_brq_grava_dados_laudo @NUM_PI";
@@ -119,9 +121,9 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
 
                     return result.ToList().Count > 0 ? result.ToList()[0] : null;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
+                    throw new CommunicationException("Ocorreu um erro ao acessar a base. Método: SompoRepository.GravarRetornarDadosLaudo - Erro: " + ex.Message);
                 }
             }
         }
@@ -145,9 +147,9 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
 
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
+                    throw new CommunicationException("Ocorreu um erro ao acessar a base. Método: SompoRepository.GravarRetornoCancelarInspecao - Erro: " + ex.Message);
                 }
             }
 

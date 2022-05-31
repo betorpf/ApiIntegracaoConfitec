@@ -8,14 +8,14 @@ using System.Net;
 
 namespace ApiIntegracaoConfitec.Models.Sompo.Controller
 {
-    public class CancelarInspecaoResponse : IResultHttpResponse
+    public class CancelarInspecaoHttpResponse : IResultHttpResponse
     {
         public int NumPI { get; set; }
         public bool Success { get; set; }
         public string Message { get; set; }
         public List<string> Errors { get; set; }
         
-        public CancelarInspecaoResponse(int numPI)
+        public CancelarInspecaoHttpResponse(int numPI)
         {
             this.NumPI = numPI;
         }

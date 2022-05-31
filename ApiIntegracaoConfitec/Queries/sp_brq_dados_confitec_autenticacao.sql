@@ -1,4 +1,7 @@
-﻿IF EXISTS (
+﻿USE RamosDiversos
+GO
+
+IF EXISTS (
 		SELECT *
 		FROM sys.objects WITH (NOLOCK)
 		WHERE name = 'sp_brq_dados_confitec_autenticacao'
