@@ -61,8 +61,10 @@ namespace ApiIntegracaoConfitecTests
             }
         }
 
-        public DadosAutenticacao DadosAutenticacaoPadrao {
-            get {
+        public DadosAutenticacao DadosAutenticacaoPadrao
+        {
+            get
+            {
                 return
                     new DadosAutenticacao() { SompoPassword = "pass", SompoUsername = "user" };
             }
@@ -83,20 +85,29 @@ namespace ApiIntegracaoConfitecTests
         public void SolicitarInspecaoHandler()
         {
             //Arrange
-            SolicitarInspecaoRequest solicitarInspecaoRequest = new SolicitarInspecaoRequest();
+            SolicitarInspecaoRequest solicitarInspecaoRequest = new SolicitarInspecaoRequest() { PI = 1 };
 
             SolicitarAutenticacaoConfitecRequest solicitarAutenticacaoConfitecRequest = new(this.DadosAutenticacaoPadrao);
 
-            var solicitarAutenticacaoConfitecHandler = new Mock<ISolicitarAutenticacaoConfitecHandler>();
-            solicitarAutenticacaoConfitecHandler.Setup(s => s.Handle(solicitarAutenticacaoConfitecRequest))
-                .ReturnsAsync(new SolicitarAutenticacaoConfitecResponse(this.ResponseTokenPadrao));
+            //Buscar Dados da autenticação
+            var buscarDadosAutenticacaoConfitecResponse = new BuscarDadosAutenticacaoConfitecResponse(this.DadosAutenticacaoPadrao);
+            var buscarDadosAutenticacaoConfitecHandler = new Mock<IBuscarDadosAutenticacaoConfitecHandler>();
+            buscarDadosAutenticacaoConfitecHandler.Setup(s => s.Handle())
+                .ReturnsAsync(buscarDadosAutenticacaoConfitecResponse);
 
+            //Chamar serviço Confitec de Autenticação
+            var solicitarAutenticacaoConfitecResponse = new SolicitarAutenticacaoConfitecResponse(this.ResponseTokenPadrao);
+            var solicitarAutenticacaoConfitecHandler = new Mock<ISolicitarAutenticacaoConfitecHandler>();
+            solicitarAutenticacaoConfitecHandler.Setup(s => s.Handle(It.IsAny<SolicitarAutenticacaoConfitecRequest>()))
+                .ReturnsAsync(solicitarAutenticacaoConfitecResponse);
+
+            //Buscar Dados para Solicitar a Inspeção
             BuscarDadosSolicitarInspecaoRequest buscarDadosSolicitarInspecaoRequest = new(1);
             var buscarDadosSolicitarInspecaoHandler = new Mock<IBuscarDadosSolicitarInspecaoHandler>();
-            buscarDadosSolicitarInspecaoHandler.Setup(s => s.Handle(buscarDadosSolicitarInspecaoRequest))
+            buscarDadosSolicitarInspecaoHandler.Setup(s => s.Handle(It.IsAny<BuscarDadosSolicitarInspecaoRequest>()))
                 .ReturnsAsync(new BuscarDadosSolicitarInspecaoResponse(this.DadosInspecaoPadrao));
 
-
+            //Chamar serviço Confitec de Enviar Solicitação de Inspeção
             EnviarSolicitacaoInspecaoConfitecRequest enviarSolicitacaoInspecaoConfitecRequest = new(this.DadosInspecaoPadrao, this.ResponseTokenPadrao.access_token);
             EnviarSolicitacaoInspecaoConfitecResponse enviarSolicitacaoInspecaoConfitecResponse = new(new ConfitecSolicitarInspecao()
             {
@@ -108,39 +119,31 @@ namespace ApiIntegracaoConfitecTests
                 erros = null
 
             });
-
-
             var enviarSolicitacaoInspecaoConfitecHandler = new Mock<IEnviarSolicitacaoInspecaoConfitecHandler>();
-            enviarSolicitacaoInspecaoConfitecHandler.Setup(s => s.Handle(enviarSolicitacaoInspecaoConfitecRequest))
+            enviarSolicitacaoInspecaoConfitecHandler.Setup(s => s.Handle(It.IsAny<EnviarSolicitacaoInspecaoConfitecRequest>()))
                 .ReturnsAsync(enviarSolicitacaoInspecaoConfitecResponse);
 
 
-            var buscarDadosAutenticacaoConfitecResponse = new BuscarDadosAutenticacaoConfitecResponse (this.DadosAutenticacaoPadrao);
-            var buscarDadosAutenticacaoConfitecHandler = new Mock<IBuscarDadosAutenticacaoConfitecHandler>();
-            buscarDadosAutenticacaoConfitecHandler.Setup(s => s.Handle())
-                .ReturnsAsync(buscarDadosAutenticacaoConfitecResponse);
-
+            //Gravar resultado
             var gravarRespostaInspecaoHandler = new Mock<IGravarRespostaInspecaoHandler>();
-
             var gravarRespostaInspecaoRequest = new GravarRespostaInspecaoRequest(enviarSolicitacaoInspecaoConfitecResponse.response);
             var gravarRespostaInspecaoResponse = new GravarRespostaInspecaoResponse(true, "Sucesso");
-
-
-            gravarRespostaInspecaoHandler.Setup(s => s.Handle(gravarRespostaInspecaoRequest))
+            gravarRespostaInspecaoHandler.Setup(s => s.Handle(It.IsAny<GravarRespostaInspecaoRequest>()))
                 .ReturnsAsync(gravarRespostaInspecaoResponse);
 
             //Act
             ISolicitarInspecaoHandler solicitarInspecaoHandler = new SolicitarInspecaoHandler(
-                buscarDadosSolicitarInspecaoHandler.Object,
-                enviarSolicitacaoInspecaoConfitecHandler.Object,
                 buscarDadosAutenticacaoConfitecHandler.Object,
                 solicitarAutenticacaoConfitecHandler.Object,
+
+                buscarDadosSolicitarInspecaoHandler.Object,
+                enviarSolicitacaoInspecaoConfitecHandler.Object,
                 gravarRespostaInspecaoHandler.Object);
             var result = solicitarInspecaoHandler.Handle(solicitarInspecaoRequest);
 
 
             //Assert
-            Assert.That(gravarRespostaInspecaoResponse.Success, Is.True);
+            Assert.That(result.Result.Message, Is.EqualTo("Solicitação de Inspeção efetuada com sucesso."));
         }
     }
 }
