@@ -43,7 +43,7 @@ namespace ApiIntegracaoConfitec.Business.Sompo
 
             //TODO: 3: Gravar resultado
             GravarRespostaCancelamentoRequest gravarRespostaCancelamentoRequest = new GravarRespostaCancelamentoRequest(enviarSolicitacaoCancelamentoConfitecResponse.response);
-            GravarRespostaCancelamentoResponse gravarRespostaCancelamentoResponse = await this._gravarRespostaCancelamentoHandler.Handle(gravarRespostaCancelamentoRequest);
+            await this._gravarRespostaCancelamentoHandler.Handle(gravarRespostaCancelamentoRequest);
 
             //TODO: 4: Retornar resultado
             cancelarInspecaoResponse.Success = true;

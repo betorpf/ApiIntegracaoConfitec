@@ -1,5 +1,6 @@
 ﻿using ApiIntegracaoConfitec.Interfaces.Services;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiIntegracaoConfitec.Models.Confitec
 {

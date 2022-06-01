@@ -18,6 +18,7 @@ namespace ApiIntegracaoConfitec.Models.Sompo.Controller
         public CancelarInspecaoHttpResponse(int numPI)
         {
             this.NumPI = numPI;
+            this.Errors = new List<string>();
         }
     }
 }

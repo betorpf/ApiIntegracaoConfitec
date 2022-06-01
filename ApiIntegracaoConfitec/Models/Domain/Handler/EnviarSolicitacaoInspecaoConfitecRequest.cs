@@ -9,10 +9,6 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
     {
         public DadosInspecao dadosInspecao;
         public string access_token;
-        public int PI { get; set; }
-        public string Codigo { get; set; }
-        public bool Success { get; set; }
-        public string Message { get; set; }
 
         public EnviarSolicitacaoInspecaoConfitecRequest(DadosInspecao dadosInspecao, string access_token)
         {
@@ -23,6 +19,10 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
             if (ListaValidacao.Count > 0)
             {
                 throw new BRQValidationException("Validação de dados da inspeção selecionada.", ListaValidacao);
+            }
+            if(string.IsNullOrEmpty(access_token))
+            {
+                throw new BRQValidationException("Access Token vazio.");
             }
 
         }

@@ -9,15 +9,15 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
         public bool Success { get; set; }
         public string Message { get; set; }
 
-        public GravarDadosLaudoResponse(bool success, string message)
+        public GravarDadosLaudoResponse(bool Success, string Message)
         {
-            this.Success = success;
-            this.Message = message;
-            //var ListaValidacao = ValidationUtility.ListValidateObject(this.dadosLaudo);
-            //if (ListaValidacao.Count > 0)
-            //{
-            //    throw new BRQValidationException("Validação nos dados do Laudo", ListaValidacao);
-            //}
+            this.Success = Success;
+            this.Message = Message;
+
+            if (!this.Success)
+            {
+                throw new BRQValidationException(this.Message);
+            }
         }
     }
 }

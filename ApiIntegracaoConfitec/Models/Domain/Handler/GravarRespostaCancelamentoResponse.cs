@@ -1,4 +1,6 @@
-﻿namespace ApiIntegracaoConfitec.Models.Domain.Handler
+﻿using ApiIntegracaoConfitec.Helpers;
+
+namespace ApiIntegracaoConfitec.Models.Domain.Handler
 {
     public class GravarRespostaCancelamentoResponse
     {
@@ -8,6 +10,11 @@
         {
             this.Success = Success;
             this.Message = message;
+
+            if (!this.Success)
+            {
+                throw new BRQValidationException(this.Message);
+            }
         }
     }
 }

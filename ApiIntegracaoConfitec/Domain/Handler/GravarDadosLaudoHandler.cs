@@ -1,6 +1,5 @@
 ﻿using ApiIntegracaoConfitec.Interfaces.Domain.Handler;
 using ApiIntegracaoConfitec.Interfaces.Infrastructure.Repository;
-using ApiIntegracaoConfitec.Models.Confitec;
 using ApiIntegracaoConfitec.Models.Domain.Handler;
 using ApiIntegracaoConfitec.Models.Entity;
 using System.Threading.Tasks;

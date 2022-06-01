@@ -1,5 +1,4 @@
-﻿using ApiIntegracaoConfitec.Domain.Utility;
-using ApiIntegracaoConfitec.Interfaces.Business.Sompo;
+﻿using ApiIntegracaoConfitec.Interfaces.Business.Sompo;
 using ApiIntegracaoConfitec.Interfaces.Controller;
 using ApiIntegracaoConfitec.Models.Sompo.Controller;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +30,6 @@ namespace ApiIntegracaoConfitec.Controllers
                 [FromServices] ICancelarInspecaoHandler handler,
                 [FromBody] CancelarInspecaoRequest request)
         {
-            
                 CancelarInspecaoHttpResponse response = await handler.Handle(request);
                 return this.Ok(response);
         }

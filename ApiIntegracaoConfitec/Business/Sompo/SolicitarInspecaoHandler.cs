@@ -51,11 +51,11 @@ namespace ApiIntegracaoConfitec.Business.Sompo
             EnviarSolicitacaoInspecaoConfitecRequest enviarSolicitacaoInspecaoConfitecRequest = new(buscaDadosSolicitarInspecaoResponse.dadosInspecao, solicitarAutenticacaoConfitecResponse.responseToken.access_token);
             EnviarSolicitacaoInspecaoConfitecResponse enviarSolicitacaoInspecaoConfitecResponse =   await this._enviarSolicitacaoInspecaoConfitecHandler.Handle(enviarSolicitacaoInspecaoConfitecRequest);
 
-            //TODO: 3: Gravar resultado
+            //Gravar resultado
             GravarRespostaInspecaoRequest gravarRespostaInspecaoRequest = new(enviarSolicitacaoInspecaoConfitecResponse.response);
-            GravarRespostaInspecaoResponse gravarRespostaInspecaoResponse = await this._gravarRespostaInspecaoHandler.Handle(gravarRespostaInspecaoRequest);
+            await this._gravarRespostaInspecaoHandler.Handle(gravarRespostaInspecaoRequest);
 
-            //TODO: 4: Retornar resultado
+            //Retornar resultado
             solicitarInspecaoResponse.Success = true;
             solicitarInspecaoResponse.Message = "Solicitação de Inspeção efetuada com sucesso.";
             return solicitarInspecaoResponse;

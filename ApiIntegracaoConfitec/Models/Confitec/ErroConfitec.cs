@@ -1,5 +1,8 @@
-﻿namespace ApiIntegracaoConfitec.Models.Confitec
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace ApiIntegracaoConfitec.Models.Confitec
 {
+    [ExcludeFromCodeCoverage]
     public class ErroConfitec
     {
         public string CodigoErro { get; set; }

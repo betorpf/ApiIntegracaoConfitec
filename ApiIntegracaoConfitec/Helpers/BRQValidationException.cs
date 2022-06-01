@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace ApiIntegracaoConfitec.Helpers
 {
+    [ExcludeFromCodeCoverage]
     public class BRQValidationException : Exception
     {
         public List<string> listValidationResult { get; set; }

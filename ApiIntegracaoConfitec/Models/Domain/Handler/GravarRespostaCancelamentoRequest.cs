@@ -1,4 +1,6 @@
-﻿using ApiIntegracaoConfitec.Models.Confitec;
+﻿using ApiIntegracaoConfitec.Domain.Utility;
+using ApiIntegracaoConfitec.Helpers;
+using ApiIntegracaoConfitec.Models.Confitec;
 
 namespace ApiIntegracaoConfitec.Models.Domain.Handler
 {
@@ -9,6 +11,11 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
         public GravarRespostaCancelamentoRequest(ResponseCancelarInspecao responseCancelarInspecao)
         {
             this.responseCancelarInspecao = responseCancelarInspecao;
+            var ListaValidacao = ValidationUtility.ListValidateObject(this.responseCancelarInspecao);
+            if (this.responseCancelarInspecao.erros != null && this.responseCancelarInspecao.erros.Count > 0)
+            {
+                throw new ConfitecErrorsException("Validação de dados retornados da Confitec", this.responseCancelarInspecao.erros);
+            }
         }
     }
 }

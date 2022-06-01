@@ -11,13 +11,9 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
         public GravarRespostaInspecaoRequest(ConfitecSolicitarInspecao responseSolicitacaoInspecao)
         {
             this.responseSolicitacaoInspecao = responseSolicitacaoInspecao;
-            var ListaValidacao = ValidationUtility.ListValidateObject(this.responseSolicitacaoInspecao);
-
+            
             if (responseSolicitacaoInspecao.erros != null && responseSolicitacaoInspecao.erros.Count > 0)
-                throw new ConfitecErrorsException("Validação realizada pela Confitec", responseSolicitacaoInspecao.erros);
-
-            if (ListaValidacao != null && ListaValidacao.Count > 0)
-                throw new BRQValidationException("Validação dos dados recebidos da Confitec", ListaValidacao);
+                throw new ConfitecErrorsException("Validação de dados retornados da Confitec", responseSolicitacaoInspecao.erros);
         }
     }
 }
