@@ -130,7 +130,6 @@ namespace ApiIntegracaoConfitecTests
             ISolicitarInspecaoHandler solicitarInspecaoHandler = new SolicitarInspecaoHandler(
                 buscarDadosAutenticacaoConfitecHandler.Object,
                 solicitarAutenticacaoConfitecHandler.Object,
-
                 buscarDadosSolicitarInspecaoHandler.Object,
                 enviarSolicitacaoInspecaoConfitecHandler.Object,
                 gravarRespostaInspecaoHandler.Object);
