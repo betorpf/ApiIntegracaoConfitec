@@ -58,7 +58,7 @@ namespace ApiIntegracaoConfitecTests.Business
         }
 
         [Test]
-        public void CancelarInspecaoHandler()
+        public void GravarDadosLaudoHandler()
         {
             //TODO: Validar
             //Arrange
