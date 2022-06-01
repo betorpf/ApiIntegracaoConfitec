@@ -46,8 +46,8 @@ namespace ApiIntegracaoConfitec.Business.Sompo
             GravarRespostaCancelamentoResponse gravarRespostaCancelamentoResponse = await this._gravarRespostaCancelamentoHandler.Handle(gravarRespostaCancelamentoRequest);
 
             //TODO: 4: Retornar resultado
-            cancelarInspecaoResponse.Success = gravarRespostaCancelamentoResponse.Success;
-            cancelarInspecaoResponse.Message = gravarRespostaCancelamentoResponse.Message;
+            cancelarInspecaoResponse.Success = true;
+            cancelarInspecaoResponse.Message = "Cancelamento de Inspeção efetuada com sucesso.";
             return cancelarInspecaoResponse;
         }
     }

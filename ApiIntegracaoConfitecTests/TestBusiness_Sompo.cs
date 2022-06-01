@@ -78,16 +78,11 @@ namespace ApiIntegracaoConfitecTests
             }
         }
 
-
-
-
         [Test]
         public void SolicitarInspecaoHandler()
         {
             //Arrange
             SolicitarInspecaoRequest solicitarInspecaoRequest = new SolicitarInspecaoRequest() { PI = 1 };
-
-            SolicitarAutenticacaoConfitecRequest solicitarAutenticacaoConfitecRequest = new(this.DadosAutenticacaoPadrao);
 
             //Buscar Dados da autenticação
             var buscarDadosAutenticacaoConfitecResponse = new BuscarDadosAutenticacaoConfitecResponse(this.DadosAutenticacaoPadrao);
@@ -145,5 +140,66 @@ namespace ApiIntegracaoConfitecTests
             //Assert
             Assert.That(result.Result.Message, Is.EqualTo("Solicitação de Inspeção efetuada com sucesso."));
         }
+
+        [Test]
+        public void CancelarInspecaoHandler()
+        {
+            //Arrange
+            CancelarInspecaoRequest cancelarInspecaoRequest = new CancelarInspecaoRequest() { PI = 1 };
+
+            //Buscar Dados da autenticação
+            var buscarDadosAutenticacaoConfitecResponse = new BuscarDadosAutenticacaoConfitecResponse(this.DadosAutenticacaoPadrao);
+            var buscarDadosAutenticacaoConfitecHandler = new Mock<IBuscarDadosAutenticacaoConfitecHandler>();
+            buscarDadosAutenticacaoConfitecHandler.Setup(s => s.Handle())
+                .ReturnsAsync(buscarDadosAutenticacaoConfitecResponse);
+
+            //Chamar serviço Confitec de Autenticação
+            var solicitarAutenticacaoConfitecResponse = new SolicitarAutenticacaoConfitecResponse(this.ResponseTokenPadrao);
+            var solicitarAutenticacaoConfitecHandler = new Mock<ISolicitarAutenticacaoConfitecHandler>();
+            solicitarAutenticacaoConfitecHandler.Setup(s => s.Handle(It.IsAny<SolicitarAutenticacaoConfitecRequest>()))
+                .ReturnsAsync(solicitarAutenticacaoConfitecResponse);
+
+
+            //Chamar serviço Confitec de Enviar Cancelamento de Inspeção
+
+            //EnviarSolicitacaoCancelamentoConfitecRequest enviarSolicitacaoCancelamentoConfitecRequest = new EnviarSolicitacaoCancelamentoConfitecRequest(cancelarInspecaoResponse.NumPI, solicitarAutenticacaoConfitecResponse.responseToken.access_token);
+            //EnviarSolicitacaoCancelamentoConfitecResponse enviarSolicitacaoCancelamentoConfitecResponse = await this._enviarSolicitacaoCancelamentoConfitecHandler.Handle(enviarSolicitacaoCancelamentoConfitecRequest);
+
+
+            EnviarSolicitacaoCancelamentoConfitecRequest enviarSolicitacaoCancelamentoConfitecRequest = new(1, this.ResponseTokenPadrao.access_token);
+            EnviarSolicitacaoCancelamentoConfitecResponse enviarSolicitacaoCancelamentoConfitecResponse = new(new ResponseCancelarInspecao()
+            {
+                numeroInspecao = "1",
+                dataProcessamento = "20/05/2022",
+                codigoResultado = "1",
+                mensagemRetorno = "",
+                protocoloAbertura = "Sucesso",
+                erros = null
+
+            });
+            var enviarSolicitacaoCancelamentoConfitecHandler = new Mock<IEnviarSolicitacaoCancelamentoConfitecHandler>();
+            enviarSolicitacaoCancelamentoConfitecHandler.Setup(s => s.Handle(It.IsAny<EnviarSolicitacaoCancelamentoConfitecRequest>()))
+                .ReturnsAsync(enviarSolicitacaoCancelamentoConfitecResponse);
+
+            //Gravar resultado
+            var gravarRespostaCancelamentoHandler = new Mock<IGravarRespostaCancelamentoHandler>();
+            var gravarRespostaCancelamentoRequest = new GravarRespostaCancelamentoRequest(enviarSolicitacaoCancelamentoConfitecResponse.response);
+            var gravarRespostaCancelamentoResponse = new GravarRespostaCancelamentoResponse(true, "Sucesso");
+            gravarRespostaCancelamentoHandler.Setup(s => s.Handle(It.IsAny<GravarRespostaCancelamentoRequest>()))
+                .ReturnsAsync(gravarRespostaCancelamentoResponse);
+
+            //Act
+            ICancelarInspecaoHandler cancelarInspecaoHandler = new CancelarInspecaoHandler(
+                enviarSolicitacaoCancelamentoConfitecHandler.Object,
+            buscarDadosAutenticacaoConfitecHandler.Object,
+            solicitarAutenticacaoConfitecHandler.Object,
+            gravarRespostaCancelamentoHandler.Object);
+            var result = cancelarInspecaoHandler.Handle(cancelarInspecaoRequest);
+
+
+            //Assert
+            Assert.That(result.Result.Message, Is.EqualTo("Cancelamento de Inspeção efetuada com sucesso."));
+        }
+
     }
 }

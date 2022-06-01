@@ -16,8 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Business\Confitec\InformarDadosInspecaoHandler.cs" />
     <Compile Remove="Domain\Handler\DadosInspecaoBuscarCommandHandler.cs" />
     <Compile Remove="Infrastructure\Repository\DadosInspecaoRepository.cs" />
+    <Compile Remove="Interfaces\Business\Confitec\IInformaDadosInspecaoHandler.cs" />
   </ItemGroup>
 
   <ItemGroup>
