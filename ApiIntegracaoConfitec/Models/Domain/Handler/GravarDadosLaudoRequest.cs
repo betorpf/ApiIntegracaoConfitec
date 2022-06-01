@@ -5,11 +5,11 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
 {
     public class gravarDadosLaudoRequest
     {
-        public ResultadoInspecaoRequest resultadoInspecaoRequest { get; set; }
+        public ResultadoInspecao resultadoInspecao { get; set; }
 
-        public gravarDadosLaudoRequest(ResultadoInspecaoRequest resultadoInspecaoRequest)
+        public gravarDadosLaudoRequest(ResultadoInspecao resultadoInspecao)
         {
-            this.resultadoInspecaoRequest = resultadoInspecaoRequest;
+            this.resultadoInspecao = resultadoInspecao;
         }
     }
 }

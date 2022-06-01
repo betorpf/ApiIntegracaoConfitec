@@ -16,11 +16,11 @@ namespace ApiIntegracaoConfitec.Domain.Handler
             this._sompoRepository = sompoRepository;
         }
 
-        public async Task<GravarDadosLaudoResponse> Handle(ResultadoInspecaoRequest request)
+        public async Task<GravarDadosLaudoResponse> Handle(ResultadoInspecao request)
         {
-            DadosLaudo dadosLaudo = await this._sompoRepository.GravarRetornarDadosLaudo(request);
+            QueryResult queryResult = await this._sompoRepository.GravarRetornarDadosLaudo(request);
 
-            GravarDadosLaudoResponse response = new GravarDadosLaudoResponse(dadosLaudo);
+            GravarDadosLaudoResponse response = new GravarDadosLaudoResponse(queryResult.Success, queryResult.Message);
 
             return response;
         }

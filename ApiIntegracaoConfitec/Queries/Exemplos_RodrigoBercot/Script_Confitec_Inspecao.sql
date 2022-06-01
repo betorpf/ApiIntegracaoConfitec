@@ -1,7 +1,9 @@
 use RamosDiversos
 go
 
-select a.NUM_INSP,c.num_insp AS 'NUM_INSP_TAB_INSP',Insp_Obr,Ind_StatusInspecao,d.NUM_APOL_AN INTO #TMP from Tab_Ped d 
+--DROP TABLE #TMP
+select a.NUM_INSP,c.num_insp AS 'NUM_INSP_TAB_INSP',Insp_Obr,Ind_StatusInspecao,d.NUM_APOL_AN, b.NUM_PI, b.Ind_StatusInspecao
+from Tab_Ped d 
 inner join Tab_Ped_Loc a
 	on a.NUM_PI = d.num_pi
 inner join TAB_PED_LOC_COMPL b
@@ -13,7 +15,9 @@ inner join Tab_Trans_Insp c
 where a.NOSSO_NUMERO like '021%'
 and Insp_Obr = 1 order by 1 desc
 
-DROP TABLE #TMP
+select * from #TMP
+
+
 select * from TAB_TRANS_COBERT_INSP where Num_Insp = 541545
 
 select NUM_INSP,* from SPX21250PSQLNEO.YAS_ND.YAS.TAB_PED_LOC where num_apol = 1400462310 and NUM_ENDO = 0

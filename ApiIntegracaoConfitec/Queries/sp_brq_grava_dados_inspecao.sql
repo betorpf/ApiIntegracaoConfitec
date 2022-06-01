@@ -153,8 +153,7 @@ BEGIN
 			END
 		END
 	END
-	END
-
+	
 	IF (@NUM_PI <> 0)
 	BEGIN
 		SELECT TOP 1 *

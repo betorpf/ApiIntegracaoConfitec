@@ -6,6 +6,6 @@ namespace ApiIntegracaoConfitec.Interfaces.Domain.Handler
 {
     public interface IGravarDadosLaudoHandler
     {
-        Task<GravarDadosLaudoResponse> Handle(ResultadoInspecaoRequest request);
+        Task<GravarDadosLaudoResponse> Handle(ResultadoInspecao request);
     }
 }
