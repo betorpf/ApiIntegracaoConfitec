@@ -19,8 +19,8 @@ namespace ApiIntegracaoConfitec.Business.Confitec
 
         public async Task<RetornarDadosLaudoResponse> Handle(ResultadoInspecaoRequest resultadoInspecaoRequest)
         {
-            gravarDadosLaudoRequest gravarDadosLaudoRequest = new(resultadoInspecaoRequest.ResultadoInspecao);
-            GravarDadosLaudoResponse informarDadosLaudoResponse = await this._gravarDadosLaudoHandler.Handle(gravarDadosLaudoRequest.resultadoInspecao);
+            GravarDadosLaudoRequest gravarDadosLaudoRequest = new(resultadoInspecaoRequest.ResultadoInspecao);
+            GravarDadosLaudoResponse informarDadosLaudoResponse = await this._gravarDadosLaudoHandler.Handle(gravarDadosLaudoRequest);
 
             return new RetornarDadosLaudoResponse
             {

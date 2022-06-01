@@ -16,9 +16,9 @@ namespace ApiIntegracaoConfitec.Domain.Handler
             this._sompoRepository = sompoRepository;
         }
 
-        public async Task<GravarDadosLaudoResponse> Handle(ResultadoInspecao request)
+        public async Task<GravarDadosLaudoResponse> Handle(GravarDadosLaudoRequest request)
         {
-            QueryResult queryResult = await this._sompoRepository.GravarRetornarDadosLaudo(request);
+            QueryResult queryResult = await this._sompoRepository.GravarRetornarDadosLaudo(request.resultadoInspecao);
 
             GravarDadosLaudoResponse response = new GravarDadosLaudoResponse(queryResult.Success, queryResult.Message);
 

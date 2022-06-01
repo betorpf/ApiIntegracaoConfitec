@@ -1,8 +1,6 @@
 using ApiIntegracaoConfitec.Business.Sompo;
-using ApiIntegracaoConfitec.Domain.Handler;
 using ApiIntegracaoConfitec.Interfaces.Business.Sompo;
 using ApiIntegracaoConfitec.Interfaces.Domain.Handler;
-using ApiIntegracaoConfitec.Interfaces.Service;
 using ApiIntegracaoConfitec.Models.Confitec;
 using ApiIntegracaoConfitec.Models.Domain.Handler;
 using ApiIntegracaoConfitec.Models.Entity;
@@ -10,7 +8,7 @@ using ApiIntegracaoConfitec.Models.Sompo.Controller;
 using Moq;
 using NUnit.Framework;
 
-namespace ApiIntegracaoConfitecTests
+namespace ApiIntegracaoConfitecTests.Business
 {
     [TestFixture]
     public class TestBusiness_Sompo
@@ -160,11 +158,6 @@ namespace ApiIntegracaoConfitecTests
 
 
             //Chamar serviço Confitec de Enviar Cancelamento de Inspeção
-
-            //EnviarSolicitacaoCancelamentoConfitecRequest enviarSolicitacaoCancelamentoConfitecRequest = new EnviarSolicitacaoCancelamentoConfitecRequest(cancelarInspecaoResponse.NumPI, solicitarAutenticacaoConfitecResponse.responseToken.access_token);
-            //EnviarSolicitacaoCancelamentoConfitecResponse enviarSolicitacaoCancelamentoConfitecResponse = await this._enviarSolicitacaoCancelamentoConfitecHandler.Handle(enviarSolicitacaoCancelamentoConfitecRequest);
-
-
             EnviarSolicitacaoCancelamentoConfitecRequest enviarSolicitacaoCancelamentoConfitecRequest = new(1, this.ResponseTokenPadrao.access_token);
             EnviarSolicitacaoCancelamentoConfitecResponse enviarSolicitacaoCancelamentoConfitecResponse = new(new ResponseCancelarInspecao()
             {

@@ -6,9 +6,7 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
     {
         public string access_token;
         public int NumPI { get; set; }
-        public string Codigo { get; set; }
         public bool Success { get; set; }
-        public string Message { get; set; }
 
         public EnviarSolicitacaoCancelamentoConfitecRequest(int numPI, string access_token)
         {
