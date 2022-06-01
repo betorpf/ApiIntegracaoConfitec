@@ -104,10 +104,11 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
         {
             var parameters = new DynamicParameters(new
             {
-                NUM_PI = pi
+                NUM_PI = pi,
+                CODIGO_PARECER = 0
             });
 
-            var sql = $@"EXEC sp_brq_grava_dados_laudo @NUM_PI";
+            var sql = $@"EXEC sp_brq_grava_dados_laudo @NUM_PI, @CODIGO_PARECER";
 
             using (var connectionDb = this._connection.Connection())
             {
@@ -119,7 +120,7 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
 
                     return result.ToList().Count > 0 ? result.ToList()[0] : null;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     throw;
                 }
