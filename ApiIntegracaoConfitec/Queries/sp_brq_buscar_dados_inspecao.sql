@@ -1,3 +1,6 @@
+USE RamosDiversos
+GO
+
 IF EXISTS (
 		SELECT *
 		FROM sys.objects WITH (NOLOCK)

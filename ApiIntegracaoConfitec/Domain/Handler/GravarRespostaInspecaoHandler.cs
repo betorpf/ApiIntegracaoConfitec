@@ -1,6 +1,7 @@
 ﻿using ApiIntegracaoConfitec.Interfaces.Domain.Handler;
 using ApiIntegracaoConfitec.Interfaces.Infrastructure.Repository;
 using ApiIntegracaoConfitec.Models.Domain.Handler;
+using ApiIntegracaoConfitec.Models.Entity;
 using System.Threading.Tasks;
 
 namespace ApiIntegracaoConfitec.Domain.Handler
@@ -16,9 +17,9 @@ namespace ApiIntegracaoConfitec.Domain.Handler
 
         public async Task<GravarRespostaInspecaoResponse> Handle(GravarRespostaInspecaoRequest request)
         {
-            bool resultado = await this._sompoRepository.GravarRetornoSolicitarInspecao(request.responseSolicitacaoInspecao);
+            QueryResult queryResult = await this._sompoRepository.GravarRetornoSolicitarInspecao(request.responseSolicitacaoInspecao);
 
-            GravarRespostaInspecaoResponse response = new GravarRespostaInspecaoResponse(resultado, "");
+            GravarRespostaInspecaoResponse response = new GravarRespostaInspecaoResponse(queryResult.Success, queryResult.Message);
 
             return response;
         }

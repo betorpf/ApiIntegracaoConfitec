@@ -6,10 +6,8 @@ namespace ApiIntegracaoConfitec.Models.Confitec.Controller
 {
     public class RetornarDadosLaudoResponse : IResultHttpResponse
     {
-        public int NumPI { get; set; }
         public bool Success { get; set; }
         public string Message { get; set; }
-        public HttpStatusCode StatusCode { get; set; }
-        public List<string> Errors { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public List<string> Errors { get; set; }
     }
 }

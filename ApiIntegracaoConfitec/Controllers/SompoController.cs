@@ -32,7 +32,7 @@ namespace ApiIntegracaoConfitec.Controllers
                 [FromBody] CancelarInspecaoRequest request)
         {
             
-                CancelarInspecaoResponse response = await handler.Handle(request);
+                CancelarInspecaoHttpResponse response = await handler.Handle(request);
                 return this.Ok(response);
         }
     }

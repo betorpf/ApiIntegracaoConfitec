@@ -12,10 +12,12 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
         {
             this.responseSolicitacaoInspecao = responseSolicitacaoInspecao;
             var ListaValidacao = ValidationUtility.ListValidateObject(this.responseSolicitacaoInspecao);
-            if (ListaValidacao.Count > 0)
-            {
+
+            if (responseSolicitacaoInspecao.erros != null && responseSolicitacaoInspecao.erros.Count > 0)
+                throw new ConfitecErrorsException("Validação realizada pela Confitec", responseSolicitacaoInspecao.erros);
+
+            if (ListaValidacao != null && ListaValidacao.Count > 0)
                 throw new BRQValidationException("Validação dos dados recebidos da Confitec", ListaValidacao);
-            }
         }
     }
 }

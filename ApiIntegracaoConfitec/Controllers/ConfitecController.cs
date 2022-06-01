@@ -1,5 +1,6 @@
 ﻿using ApiIntegracaoConfitec.Interfaces.Business.Confitec;
 using ApiIntegracaoConfitec.Interfaces.Controller;
+using ApiIntegracaoConfitec.Models.Confitec;
 using ApiIntegracaoConfitec.Models.Confitec.Controller;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -10,29 +11,15 @@ namespace ApiIntegracaoConfitec.Controllers
     [ApiController]
     public class ConfitecController : Controller
     {
-        //POST: api/EnviarRetornoLaudo
-        [Route("EnviarRetornoLaudo")]
+        [Route("EnviarResultadoInspecao")]
         [HttpPost]
-        //[Authorize] //TODO: VALIDAR
-        public async Task<ActionResult<IResultHttpResponse>> EnviarRetornoLaudo(
+        public async Task<ActionResult<IResultHttpResponse>> EnviarResultadoInspecao(
                 [FromServices] IEnviarRetornoLaudoHandler handler,
-                [FromBody] RetornarDadosLaudoRequest request)
+                [FromBody] ResultadoInspecaoRequest request)
         {
-            RetornarDadosLaudoResponse response = new();
-
-            try
-            {
-                response = await handler.Handle(request);
-            }
-            catch (System.Exception ex)
-            {
-                response.StatusCode = System.Net.HttpStatusCode.BadRequest;
-                response.Message = ex.Message;
-                return this.BadRequest(response);
-            }
-
+            //TODO Revisar
+            RetornarDadosLaudoResponse response = await handler.Handle(request);
             return this.Ok(response);
-
         }
     }
 }

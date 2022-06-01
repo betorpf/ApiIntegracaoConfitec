@@ -1,6 +1,7 @@
 ﻿using ApiIntegracaoConfitec.Models.Sompo.Controller;
 using Microsoft.AspNetCore.Http;
 using System;
+using System.Linq;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -38,7 +39,12 @@ namespace ApiIntegracaoConfitec.Helpers
                         defaultResponse.Message = e.Message;
                         response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
                         break;
-
+                    case ConfitecErrorsException e:
+                        //Custon Validation Exception
+                        defaultResponse.Errors = e.listErrors.Select(o => o.ToString()).ToList();
+                        defaultResponse.Message = e.Message;
+                        response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         defaultResponse.Message = error.Message;

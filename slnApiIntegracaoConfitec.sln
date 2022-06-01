@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiIntegracaoConfitec", "ApiIntegracaoConfitec\ApiIntegracaoConfitec.csproj", "{68BCC544-AFBB-4E68-9823-C90442C8E8FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsProject", "TestsProject\TestsProject.csproj", "{156D25C4-E146-4CF5-BE0E-39A27A52B947}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiIntegracaoConfitecTests", "ApiIntegracaoConfitecTests\ApiIntegracaoConfitecTests.csproj", "{5F166CB6-4C79-4661-9E31-A9B69B392D01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{68BCC544-AFBB-4E68-9823-C90442C8E8FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68BCC544-AFBB-4E68-9823-C90442C8E8FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68BCC544-AFBB-4E68-9823-C90442C8E8FD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{156D25C4-E146-4CF5-BE0E-39A27A52B947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{156D25C4-E146-4CF5-BE0E-39A27A52B947}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{156D25C4-E146-4CF5-BE0E-39A27A52B947}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{156D25C4-E146-4CF5-BE0E-39A27A52B947}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F166CB6-4C79-4661-9E31-A9B69B392D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F166CB6-4C79-4661-9E31-A9B69B392D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F166CB6-4C79-4661-9E31-A9B69B392D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F166CB6-4C79-4661-9E31-A9B69B392D01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

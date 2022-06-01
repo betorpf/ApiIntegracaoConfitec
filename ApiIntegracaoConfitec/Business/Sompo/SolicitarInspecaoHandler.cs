@@ -15,22 +15,25 @@ namespace ApiIntegracaoConfitec.Business.Sompo
         private readonly IGravarRespostaInspecaoHandler _gravarRespostaInspecaoHandler;
 
         public SolicitarInspecaoHandler(
-                IBuscarDadosSolicitarInspecaoHandler buscarDadosSolicitarInspecaoHandler = null,
-                IEnviarSolicitacaoInspecaoConfitecHandler enviarSolicitacaoInspecaoConfitecHandler = null, 
                 IBuscarDadosAutenticacaoConfitecHandler buscarDadosAutenticacaoConfitecHandler = null,
                 ISolicitarAutenticacaoConfitecHandler solicitarAutenticacaoConfitecHandler = null,
+
+                IBuscarDadosSolicitarInspecaoHandler buscarDadosSolicitarInspecaoHandler = null,
+                IEnviarSolicitacaoInspecaoConfitecHandler enviarSolicitacaoInspecaoConfitecHandler = null, 
                 IGravarRespostaInspecaoHandler gravarRespostaInspecaoHandler = null)
         {
-            this._buscarDadosSolicitarInspecaoHandler = buscarDadosSolicitarInspecaoHandler;
-            this._enviarSolicitacaoInspecaoConfitecHandler = enviarSolicitacaoInspecaoConfitecHandler;
             this._buscarDadosAutenticacaoConfitecHandler = buscarDadosAutenticacaoConfitecHandler;
             this._solicitarAutenticacaoConfitecHandler = solicitarAutenticacaoConfitecHandler;
+
+            this._buscarDadosSolicitarInspecaoHandler = buscarDadosSolicitarInspecaoHandler;
+            this._enviarSolicitacaoInspecaoConfitecHandler = enviarSolicitacaoInspecaoConfitecHandler;
+            
+            
             this._gravarRespostaInspecaoHandler = gravarRespostaInspecaoHandler;
         }
 
         public async Task<SolicitarInspecaoHttpResponse> Handle(SolicitarInspecaoRequest solicitarInspecaoRequest)
         {
-            //Cria Response com o NumPI Informado
             SolicitarInspecaoHttpResponse solicitarInspecaoResponse =  new();
             
             //Buscar Dados da autenticação
