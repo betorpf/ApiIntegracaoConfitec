@@ -110,7 +110,6 @@ namespace ApiIntegracaoConfitec.Services
                     responseString = await response.Content.ReadAsStringAsync();
                 }
             }
-
             return responseString;
         }
     }

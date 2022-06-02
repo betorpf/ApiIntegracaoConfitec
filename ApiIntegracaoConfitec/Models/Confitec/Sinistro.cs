@@ -9,6 +9,6 @@ namespace ApiIntegracaoConfitec.Models.Confitec
         public string causaGeradora { get; set; }
         public string dataOcorrencia { get; set; }
         public string valorSinistro { get; set; }
-        public List<ListaCoberturaAfetada> listaCoberturaAfetada { get; set; }
+        public List<CoberturaAfetada> listaCoberturaAfetada { get; set; }
     }
 }

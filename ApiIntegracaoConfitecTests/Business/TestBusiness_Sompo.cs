@@ -22,8 +22,7 @@ namespace ApiIntegracaoConfitecTests.Business
                 {
                     codigoRamo = 1,
                     codigoModalidade = 2,
-                    nomeContato = "nomeContato PI: 1"
-,
+                    nomeContato = "nomeContato PI: 1",
                     telefoneNumeroContato = "1199999999",
                     codigoCorretorPrincipal = 0,
                     numeroProposta = "1",
@@ -105,7 +104,7 @@ namespace ApiIntegracaoConfitecTests.Business
         public void SolicitarInspecaoHandler()
         {
             //Arrange
-            SolicitarInspecaoRequest solicitarInspecaoRequest = new SolicitarInspecaoRequest() { PI = 1 };
+            SolicitarInspecaoRequest solicitarInspecaoRequest = new SolicitarInspecaoRequest() { Num_PI = 1, Num_Local = 1, Tip_Emissao = 1 };
 
             //Buscar Dados da autenticação
             var buscarDadosAutenticacaoConfitecResponse = new BuscarDadosAutenticacaoConfitecResponse(this.DadosAutenticacaoPadrao);
@@ -120,7 +119,7 @@ namespace ApiIntegracaoConfitecTests.Business
                 .ReturnsAsync(solicitarAutenticacaoConfitecResponse);
 
             //Buscar Dados para Solicitar a Inspeção
-            BuscarDadosSolicitarInspecaoRequest buscarDadosSolicitarInspecaoRequest = new(1);
+            BuscarDadosSolicitarInspecaoRequest buscarDadosSolicitarInspecaoRequest = new(1, 1, 1);
             var buscarDadosSolicitarInspecaoHandler = new Mock<IBuscarDadosSolicitarInspecaoHandler>();
             buscarDadosSolicitarInspecaoHandler.Setup(s => s.Handle(It.IsAny<BuscarDadosSolicitarInspecaoRequest>()))
                 .ReturnsAsync(new BuscarDadosSolicitarInspecaoResponse(this.DadosInspecaoPadrao));

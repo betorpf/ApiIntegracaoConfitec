@@ -58,15 +58,30 @@ namespace ApiIntegracaoConfitec.Models.Confitec
 
         public RequestSolicitacaoInspecao(DadosInspecao dadosInspecao)
         {
+            this.matriculaUsuario = null;
+            this.codigoEmpresaGrupoSegurador = null;
+            this.codigoSucursal = null;
             this.codigoRamo = dadosInspecao.codigoRamo.ToString();
+            this.codigoCategoria = null;
             this.codigoModalidade = dadosInspecao.codigoModalidade.ToString();
+            this.exigencia = null;
             this.nomeContato = dadosInspecao.nomeContato;
+            this.telefoneDDIContato = null;
+            this.telefoneDDDContato = null;
+            this.telefoneRamalContato = null;
             this.telefoneNumeroContato = dadosInspecao.telefoneNumeroContato;
+            this.telefoneTipoContato = null;
             this.codigoCorretorPrincipal = dadosInspecao.codigoCorretorPrincipal.ToString();
+            this.codigoTipoSeguro = null;
+            this.numeroOrcamento = null;
+            this.numeroVersaoOrcamento = null;
             this.numeroProposta = dadosInspecao.numeroProposta;
+            this.numeroVersaoProposta = null;
             this.numeroObjetoSegurado = dadosInspecao.numeroObjetoSegurado;
             this.numeroApolice = dadosInspecao.numeroApolice.ToString();
             this.numeroEndosso = dadosInspecao.numeroEndosso.ToString();
+            this.descricaoOferta = null;
+            this.codigoPais = null;
             this.codigoUf = dadosInspecao.codigoUf;
             this.nomeMunicipio = dadosInspecao.nomeMunicipio;
             this.numeroCep = dadosInspecao.numeroCep;
@@ -74,49 +89,66 @@ namespace ApiIntegracaoConfitec.Models.Confitec
             this.nomeLogradouro = dadosInspecao.nomeLogradouro;
             this.numeroLogradouro = dadosInspecao.numeroLogradouro;
             this.nomeComplemento = dadosInspecao.nomeComplemento;
+            this.nomePontoReferencia = null;
             this.codigoTipoLogradouro = dadosInspecao.codigoTipoLogradouro;
             this.codigoTipoPessoa = dadosInspecao.codigoTipoPessoa;
             this.nomeSegurado = dadosInspecao.nomeSegurado;
             this.numeroCpfCnpjSegurado = dadosInspecao.numeroCpfCnpjSegurado;
             this.dataPedidoInspecao = dadosInspecao.dataPedidoInspecao.ToString();
+            this.dataBase = null;
+            this.latitude = null;
+            this.longitude = null;
+            this.premioItem = null;
             this.observacoes = dadosInspecao.observacoes;
             this.descricaoObjetoSegurado = dadosInspecao.descricaoObjetoSegurado;
+            this.dataPedidoOriginal = null;
+            this.sistemaOrigem = null;
 
             this.listaCoberturaInspecao = new List<CoberturaInspecao>();
-            foreach(var c in dadosInspecao.listaCoberturas)
+            foreach (var c in dadosInspecao.listaCoberturas)
             {
                 this.listaCoberturaInspecao.Add(new CoberturaInspecao()
                 {
                     codigoCobertura = c.codigoCobertura.ToString(),
-                    valorLmi = c.valorLmi.ToString()
+                    valorLmi = c.valorLmi.ToString(),
+                    coberturaBasica = null
                 });
             }
 
             this.listaTelefoneContato = new List<TelefoneContato>();
-            foreach(var c in dadosInspecao.listaContatos)
+            foreach (var c in dadosInspecao.listaContatos)
             {
                 this.listaTelefoneContato.Add(new TelefoneContato()
                 {
                     nomeContato = c.nomeContato,
-                    telefoneNumeroContato = c.telefoneNumeroContato
+                    telefoneDDIContato = null,
+                    telefoneDDDContato = null,
+                    telefoneRamalContato = null,
+                    telefoneNumeroContato = c.telefoneNumeroContato,
+                    telefoneTipoContato = null
                 });
             }
+
+            List<CoberturaAfetada> listaCoberturaAfetada = new();
+            listaCoberturaAfetada.Add(new CoberturaAfetada() { codigoCoberturaAfetada = null });
 
             this.listaSinistro = new List<Sinistro>();
             foreach (var c in dadosInspecao.listaSinistros)
             {
-                
+
                 this.listaSinistro.Add(new Sinistro()
                 {
                     numeroSinistro = c.numeroSinistro.ToString(),
                     causaGeradora = c.causaGeradora,
                     dataOcorrencia = c.dataOcorrencia,
-                    valorSinistro = c.valorSinistro.ToString()
+                    valorSinistro = c.valorSinistro.ToString(),
+                    listaCoberturaAfetada = listaCoberturaAfetada,
+                    statusSinistro = null
                 });
             }
 
             this.listaCamposVariaveis = new List<CamposVariaveis>();
-            foreach(var c in dadosInspecao.listaCamposVariaveis)
+            foreach (var c in dadosInspecao.listaCamposVariaveis)
             {
                 this.listaCamposVariaveis.Add(new CamposVariaveis()
                 {

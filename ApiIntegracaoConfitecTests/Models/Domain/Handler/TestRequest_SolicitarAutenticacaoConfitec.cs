@@ -6,10 +6,10 @@ using NUnit.Framework;
 namespace ApiIntegracaoConfitecTests.Models.Domain.Handler
 {
     [TestFixture]
-    public class DadosAutenticacaoComErros
+    public class TestRequest_SolicitarAutenticacaoConfitec
     {
         [Test]
-        public void a()
+        public void DadosAutenticacaoComErros()
         {
             //Arrange
             DadosAutenticacao dadosAutenticacao = new() { SompoPassword = "", SompoUsername = "" };

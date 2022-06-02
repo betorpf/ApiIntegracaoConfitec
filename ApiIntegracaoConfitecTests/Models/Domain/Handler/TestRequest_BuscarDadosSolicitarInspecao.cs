@@ -18,8 +18,8 @@ namespace ApiIntegracaoConfitecTests.Models.Domain.Handler
         {
             //Arrange/Act/Assert
             Assert.Throws(Is.TypeOf<BRQValidationException>()
-                          .And.Message.EqualTo("Validação de Número do PI informado."),
-                () => new BuscarDadosSolicitarInspecaoRequest(0));
+                          .And.Message.EqualTo("Validação de Dados informados"),
+                () => new BuscarDadosSolicitarInspecaoRequest(0,0,0));
         }
 
     }

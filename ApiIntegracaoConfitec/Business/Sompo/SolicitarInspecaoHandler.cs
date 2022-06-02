@@ -2,6 +2,7 @@
 using ApiIntegracaoConfitec.Interfaces.Domain.Handler;
 using ApiIntegracaoConfitec.Models.Domain.Handler;
 using ApiIntegracaoConfitec.Models.Sompo.Controller;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ApiIntegracaoConfitec.Business.Sompo
@@ -44,7 +45,7 @@ namespace ApiIntegracaoConfitec.Business.Sompo
             SolicitarAutenticacaoConfitecResponse solicitarAutenticacaoConfitecResponse = await this._solicitarAutenticacaoConfitecHandler.Handle(solicitarAutenticacaoConfitecRequest);
 
             //Buscar Dados para Solicitar a Inspeção
-            BuscarDadosSolicitarInspecaoRequest buscarDadosSolicitarInspecaoRequest = new(solicitarInspecaoRequest.PI);
+            BuscarDadosSolicitarInspecaoRequest buscarDadosSolicitarInspecaoRequest = new(solicitarInspecaoRequest.Num_PI, solicitarInspecaoRequest.Num_Local, solicitarInspecaoRequest.Tip_Emissao);
             BuscarDadosSolicitarInspecaoResponse buscaDadosSolicitarInspecaoResponse = await this._buscarDadosSolicitarInspecaoHandler.Handle(buscarDadosSolicitarInspecaoRequest);
             
             //Chamar serviço Confitec de Enviar Solicitação de Inspeção
@@ -58,6 +59,7 @@ namespace ApiIntegracaoConfitec.Business.Sompo
             //Retornar resultado
             solicitarInspecaoResponse.Success = true;
             solicitarInspecaoResponse.Message = "Solicitação de Inspeção efetuada com sucesso.";
+            solicitarInspecaoResponse.Errors = new List<string>();
             return solicitarInspecaoResponse;
         }
     }
