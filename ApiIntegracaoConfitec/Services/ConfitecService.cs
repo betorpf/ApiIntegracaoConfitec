@@ -60,7 +60,8 @@ namespace ApiIntegracaoConfitec.Services
                     string jsonContent = JsonConvert.SerializeObject(pedidoInspecao);
                     //TODO: AGUARDAR CONFITEC
                     //confitecResponse = await this.GenericPost("/inspecao/pedido/async", jsonContent, access_token);
-                    confitecResponse = "{\"numeroInspecao\": 1,\"dataProcessamento\": \"20/05/2022\",\"codigoResultado\": 1,\"mensagemRetorno\": \"\",\"protocoloAbertura\": \"Sucesso\",\"erros\": [ { \"CodigoErro\":\"321\", \"DescricaoErro\":\"ERRO GENERICO\" } ]}";
+                    //confitecResponse = "{\"numeroInspecao\": 1,\"dataProcessamento\": \"20/05/2022\",\"codigoResultado\": 1,\"mensagemRetorno\": \"\",\"protocoloAbertura\": \"Sucesso\",\"erros\": [ { \"CodigoErro\":\"321\", \"DescricaoErro\":\"ERRO GENERICO\" } ]}";
+                    confitecResponse = "{\"numeroInspecao\": 1,\"dataProcessamento\": \"20/05/2022\",\"codigoResultado\": 1,\"mensagemRetorno\": \"\",\"protocoloAbertura\": \"Sucesso\",\"erros\": null }";
                     responseSolicitacaoInspecao = JsonConvert.DeserializeObject<ConfitecSolicitarInspecao>(confitecResponse);
                 }
             }

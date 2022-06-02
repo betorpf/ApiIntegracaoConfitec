@@ -52,7 +52,7 @@ namespace ApiIntegracaoConfitecTests.Business
                     listaCoberturas = new List<ResultadoInspecaoCobertura>() { new ResultadoInspecaoCobertura() { codigoCobertura = "1", descricaoParecer = "descricaoParecer", tipoParecer = "tipoParecer" } },
                     motivoInspecao = 1,
                     dataAgendamento = DateTime.Now,
-                    numeroSinistro = 1
+                    numeroSinistro = 1,
                 };
             }
         }

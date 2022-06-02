@@ -83,43 +83,47 @@ namespace ApiIntegracaoConfitec.Models.Confitec
             this.descricaoObjetoSegurado = dadosInspecao.descricaoObjetoSegurado;
 
             this.listaCoberturaInspecao = new List<CoberturaInspecao>();
-            this.listaCoberturaInspecao.Add(new CoberturaInspecao()
+            foreach(var c in dadosInspecao.listaCoberturas)
             {
-                codigoCobertura = dadosInspecao.codigoCobertura.ToString(),
-                valorLmi = dadosInspecao.valorLmi.ToString()
-            });
-
+                this.listaCoberturaInspecao.Add(new CoberturaInspecao()
+                {
+                    codigoCobertura = c.codigoCobertura.ToString(),
+                    valorLmi = c.valorLmi.ToString()
+                });
+            }
 
             this.listaTelefoneContato = new List<TelefoneContato>();
-            this.listaTelefoneContato.Add(new TelefoneContato()
+            foreach(var c in dadosInspecao.listaContatos)
             {
-                nomeContato = dadosInspecao.nomeContato1,
-                telefoneNumeroContato = dadosInspecao.telefoneNumeroContato1
-            });
-
-            this.listaTelefoneContato.Add(new TelefoneContato()
-            {
-                nomeContato = dadosInspecao.nomeContato2,
-                telefoneNumeroContato = dadosInspecao.telefoneNumeroContato2
-            });
+                this.listaTelefoneContato.Add(new TelefoneContato()
+                {
+                    nomeContato = c.nomeContato,
+                    telefoneNumeroContato = c.telefoneNumeroContato
+                });
+            }
 
             this.listaSinistro = new List<Sinistro>();
-            this.listaSinistro.Add(new Sinistro()
+            foreach (var c in dadosInspecao.listaSinistros)
             {
-                numeroSinistro = dadosInspecao.numeroSinistro.ToString(),
-                causaGeradora = dadosInspecao.causaGeradora,
-                dataOcorrencia = dadosInspecao.dataOcorrencia,
-                valorSinistro = dadosInspecao.valorSinistro.ToString()
-            });
-
+                
+                this.listaSinistro.Add(new Sinistro()
+                {
+                    numeroSinistro = c.numeroSinistro.ToString(),
+                    causaGeradora = c.causaGeradora,
+                    dataOcorrencia = c.dataOcorrencia,
+                    valorSinistro = c.valorSinistro.ToString()
+                });
+            }
 
             this.listaCamposVariaveis = new List<CamposVariaveis>();
-            this.listaCamposVariaveis.Add(new CamposVariaveis()
+            foreach(var c in dadosInspecao.listaCamposVariaveis)
             {
-                descricaoCampo = dadosInspecao.descricaoCampo,
-                conteudoCampo = dadosInspecao.conteudoCampo
-            });
+                this.listaCamposVariaveis.Add(new CamposVariaveis()
+                {
+                    descricaoCampo = c.descricaoCampo,
+                    conteudoCampo = c.conteudoCampo
+                });
+            }
         }
-
     }
 }

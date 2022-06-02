@@ -26,17 +26,26 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
                 NUM_PI = pi
             });
 
-            var sql = $@"EXEC sp_brq_buscar_dados_inspecao @NUM_PI";
+            var sql = "RamosDiversos.dbo.sp_brq_buscar_dados_inspecao_teste";
 
             using (var connectionDb = this._connection.Connection())
             {
                 connectionDb.Open();
                 try
                 {
-                 
-                    var result = await connectionDb.QueryAsync<DadosInspecao>(sql, parameters);
-                    
-                    return result.ToList().Count > 0 ? result.ToList()[0] : null;
+                    var result = await connectionDb.QueryMultipleAsync(sql, parameters, commandType: System.Data.CommandType.StoredProcedure);
+                    var dadosInspecao = result.Read<DadosInspecao>().First();
+                    var coberturas = result.Read<DadosInspecaoCobertura>().ToList();
+                    var contatos = result.Read<DadosInspecaoContato>().ToList();
+                    var sinistros = result.Read<DadosInspecaoSinistro>().ToList();
+                    var camposVariaveis = result.Read<DadosInspecaoCamposVariaveis>().ToList();
+
+                    dadosInspecao.listaCoberturas = coberturas;
+                    dadosInspecao.listaContatos = contatos;
+                    dadosInspecao.listaSinistros = sinistros;
+                    dadosInspecao.listaCamposVariaveis = camposVariaveis;
+
+                    return dadosInspecao;
                 }
                 catch (Exception ex)
                 {

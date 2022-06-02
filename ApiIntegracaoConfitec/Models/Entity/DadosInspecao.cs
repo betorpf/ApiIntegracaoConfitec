@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiIntegracaoConfitec.Models.Entity
 {
     public class DadosInspecao
     {
-        [Required(ErrorMessage ="Código do Ramo não informado.", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Código do Ramo não informado.", AllowEmptyStrings = false)]
         public decimal codigoRamo { get; set; }
 
         [Required(ErrorMessage = "Código da Modalidade não informado.", AllowEmptyStrings = false)]
@@ -72,41 +73,46 @@ namespace ApiIntegracaoConfitec.Models.Entity
 
         [Required(ErrorMessage = "Descrição do Objeto Segurado não informado.", AllowEmptyStrings = false)]
         public string descricaoObjetoSegurado { get; set; }
+        public List<DadosInspecaoCobertura> listaCoberturas { get; set; }
+        public List<DadosInspecaoContato> listaContatos { get; set; }
+        public List<DadosInspecaoSinistro> listaSinistros { get; set; }
+        public List<DadosInspecaoCamposVariaveis> listaCamposVariaveis { get; set; }
 
-        [Required(ErrorMessage = "Código da Cobertura não informado.", AllowEmptyStrings = false)]
-        public decimal codigoCobertura { get; set; }
 
-        [Required(ErrorMessage = "Valor LMI não informado.", AllowEmptyStrings = false)]
-        public decimal valorLmi { get; set; }
+        //[Required(ErrorMessage = "Código da Cobertura não informado.", AllowEmptyStrings = false)]
+        //public decimal codigoCobertura { get; set; }
 
-        [Required(ErrorMessage = "Nome do Contato 1 não informado.", AllowEmptyStrings = false)]
-        public string nomeContato1 { get; set; }
+        //[Required(ErrorMessage = "Valor LMI não informado.", AllowEmptyStrings = false)]
+        //public decimal valorLmi { get; set; }
 
-        [Required(ErrorMessage = "Número do Telefone do Contato 1 não informado.", AllowEmptyStrings = false)]
-        public string telefoneNumeroContato1 { get; set; }
+        //[Required(ErrorMessage = "Nome do Contato 1 não informado.", AllowEmptyStrings = false)]
+        //public string nomeContato1 { get; set; }
 
-        [Required(ErrorMessage = "Nome do Contato 2 não informado.", AllowEmptyStrings = false)]
-        public string nomeContato2 { get; set; }
+        //[Required(ErrorMessage = "Número do Telefone do Contato 1 não informado.", AllowEmptyStrings = false)]
+        //public string telefoneNumeroContato1 { get; set; }
 
-        [Required(ErrorMessage = "Número do Telefone do Contato 2 não informado.", AllowEmptyStrings = false)]
-        public string telefoneNumeroContato2 { get; set; }
+        //[Required(ErrorMessage = "Nome do Contato 2 não informado.", AllowEmptyStrings = false)]
+        //public string nomeContato2 { get; set; }
 
-        [Required(ErrorMessage = "Número do Sinistro não informado.", AllowEmptyStrings = false)]
-        public decimal numeroSinistro { get; set; }
+        //[Required(ErrorMessage = "Número do Telefone do Contato 2 não informado.", AllowEmptyStrings = false)]
+        //public string telefoneNumeroContato2 { get; set; }
 
-        [Required(ErrorMessage = "Causa Geradora não informada.", AllowEmptyStrings = false)]
-        public string causaGeradora { get; set; }
+        //[Required(ErrorMessage = "Número do Sinistro não informado.", AllowEmptyStrings = false)]
+        //public decimal numeroSinistro { get; set; }
 
-        [Required(ErrorMessage = "Data da Ocorrência não informada.", AllowEmptyStrings = false)]
-        public string dataOcorrencia { get; set; }
+        //[Required(ErrorMessage = "Causa Geradora não informada.", AllowEmptyStrings = false)]
+        //public string causaGeradora { get; set; }
 
-        [Required(ErrorMessage = "Valor do Sinistro não informado.", AllowEmptyStrings = false)]
-        public decimal valorSinistro { get; set; }
+        //[Required(ErrorMessage = "Data da Ocorrência não informada.", AllowEmptyStrings = false)]
+        //public string dataOcorrencia { get; set; }
 
-        [Required(ErrorMessage = "Descrição Campo não informada.", AllowEmptyStrings = false)]
-        public string descricaoCampo { get; set; }
+        //[Required(ErrorMessage = "Valor do Sinistro não informado.", AllowEmptyStrings = false)]
+        //public decimal valorSinistro { get; set; }
 
-        [Required(ErrorMessage = "Conteúdo Campo não informado.", AllowEmptyStrings = false)]
-        public string conteudoCampo { get; set; }
+        //[Required(ErrorMessage = "Descrição Campo não informada.", AllowEmptyStrings = false)]
+        //public string descricaoCampo { get; set; }
+
+        //[Required(ErrorMessage = "Conteúdo Campo não informado.", AllowEmptyStrings = false)]
+        //public string conteudoCampo { get; set; }
     }
 }

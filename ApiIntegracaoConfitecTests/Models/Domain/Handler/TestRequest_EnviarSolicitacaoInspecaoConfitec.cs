@@ -2,6 +2,7 @@
 using ApiIntegracaoConfitec.Models.Domain.Handler;
 using ApiIntegracaoConfitec.Models.Entity;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace ApiIntegracaoConfitecTests.Models.Domain.Handler
 {
@@ -37,19 +38,43 @@ namespace ApiIntegracaoConfitecTests.Models.Domain.Handler
                 dataPedidoInspecao = 1012022,
                 observacoes = "observacoes",
                 descricaoObjetoSegurado = "descricaoObjetoSegurado",
+                listaCoberturas = new List<DadosInspecaoCobertura>(),
+                listaContatos = new List<DadosInspecaoContato>(),
+                listaSinistros = new List<DadosInspecaoSinistro>(),
+                listaCamposVariaveis = new List<DadosInspecaoCamposVariaveis>()
+            };
+
+            dadosInspecao.listaCoberturas.Add(new DadosInspecaoCobertura()
+            {
                 codigoCobertura = 311,
-                valorLmi = 654,
-                nomeContato1 = "nomeContato1",
-                telefoneNumeroContato1 = "telefoneNumeroContato1",
-                nomeContato2 = "nomeContato2",
-                telefoneNumeroContato2 = "telefoneNumeroContato2",
+                valorLmi = 654
+            });
+
+            dadosInspecao.listaSinistros.Add(new DadosInspecaoSinistro()
+            {
                 numeroSinistro = 654789,
                 causaGeradora = "causaGeradora",
                 dataOcorrencia = "dataOcorrencia",
                 valorSinistro = 654,
+            });
+
+            dadosInspecao.listaContatos.Add(new DadosInspecaoContato()
+            {
+                nomeContato = "nomeContato1",
+                telefoneNumeroContato = "telefoneNumeroContato1",
+            });
+            dadosInspecao.listaContatos.Add(new DadosInspecaoContato()
+            {
+                nomeContato = "nomeContato2",
+                telefoneNumeroContato = "telefoneNumeroContato2"
+            });
+
+            dadosInspecao.listaCamposVariaveis.Add(new DadosInspecaoCamposVariaveis()
+            {
                 descricaoCampo = "descricaoCampo",
                 conteudoCampo = "conteudoCampo"
-            };
+            });
+
             string access_token = "321";
 
             //Act/Assert
@@ -88,19 +113,43 @@ namespace ApiIntegracaoConfitecTests.Models.Domain.Handler
                 dataPedidoInspecao = 1012022,
                 observacoes = "observacoes",
                 descricaoObjetoSegurado = "descricaoObjetoSegurado",
+                listaCoberturas = new List<DadosInspecaoCobertura>(),
+                listaContatos = new List<DadosInspecaoContato>(),
+                listaSinistros = new List<DadosInspecaoSinistro>(),
+                listaCamposVariaveis = new List<DadosInspecaoCamposVariaveis>()
+            };
+
+            dadosInspecao.listaCoberturas.Add(new DadosInspecaoCobertura()
+            {
                 codigoCobertura = 311,
-                valorLmi = 654,
-                nomeContato1 = "nomeContato1",
-                telefoneNumeroContato1 = "telefoneNumeroContato1",
-                nomeContato2 = "nomeContato2",
-                telefoneNumeroContato2 = "telefoneNumeroContato2",
+                valorLmi = 654
+            });
+
+            dadosInspecao.listaSinistros.Add(new DadosInspecaoSinistro()
+            {
                 numeroSinistro = 654789,
                 causaGeradora = "causaGeradora",
                 dataOcorrencia = "dataOcorrencia",
                 valorSinistro = 654,
+            });
+
+            dadosInspecao.listaContatos.Add(new DadosInspecaoContato()
+            {
+                nomeContato = "nomeContato1",
+                telefoneNumeroContato = "telefoneNumeroContato1",
+            });
+            dadosInspecao.listaContatos.Add(new DadosInspecaoContato()
+            {
+                nomeContato = "nomeContato2",
+                telefoneNumeroContato = "telefoneNumeroContato2"
+            });
+
+            dadosInspecao.listaCamposVariaveis.Add(new DadosInspecaoCamposVariaveis()
+            {
                 descricaoCampo = "descricaoCampo",
                 conteudoCampo = "conteudoCampo"
-            };
+            });
+
             string access_token = null;
 
             //Act/Assert
