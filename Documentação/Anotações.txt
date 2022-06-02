@@ -1,0 +1,8 @@
+Num_PI
+Num_Local
+Tip_Emissao
+-- Seguro Novo = 100
+-- Renovação Sompo = 200
+-- Endosso = 300
+-- Renovação Congenere = 101
+
