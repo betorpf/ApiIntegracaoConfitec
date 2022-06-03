@@ -68,7 +68,7 @@ namespace ApiIntegracaoConfitec.Models.Entity
         [Required(ErrorMessage = "Data do Pedido de Inspeção não informada.", AllowEmptyStrings = false)]
         public decimal dataPedidoInspecao { get; set; }
 
-        [Required(ErrorMessage = "Observações não informado.", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Observações não informado.", AllowEmptyStrings = true)]
         public string observacoes { get; set; }
 
         [Required(ErrorMessage = "Descrição do Objeto Segurado não informado.", AllowEmptyStrings = false)]

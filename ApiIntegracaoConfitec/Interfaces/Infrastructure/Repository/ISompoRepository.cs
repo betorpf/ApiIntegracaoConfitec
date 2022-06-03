@@ -8,7 +8,7 @@ namespace ApiIntegracaoConfitec.Interfaces.Infrastructure.Repository
     public interface ISompoRepository
     {
         // Solicitar inspeção
-        Task<DadosInspecao> RetornarDadosInspecao(string pi);
+        Task<DadosInspecao> RetornarDadosInspecao(int Num_PI, int Num_Local, int Tip_Emissao);
         Task<DadosAutenticacao> RetornarDadosAutenticacao();
         Task<QueryResult> GravarRetornoSolicitarInspecao(ConfitecSolicitarInspecao responseSolicitarInspecao);
         // Gravar laudo
@@ -17,3 +17,5 @@ namespace ApiIntegracaoConfitec.Interfaces.Infrastructure.Repository
         Task<QueryResult> GravarRetornoCancelarInspecao(ResponseCancelarInspecao responseCancelarInspecao);
     }
 }
+
+

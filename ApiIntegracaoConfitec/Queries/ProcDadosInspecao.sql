@@ -7,14 +7,14 @@ IF EXISTS (
 	DROP PROCEDURE sp_brq_buscar_dados_inspecao_teste
 GO
 
-CREATE PROCEDURE sp_brq_buscar_dados_inspecao_teste @NUM_PI DECIMAL(10, 0) 
+CREATE PROCEDURE sp_brq_buscar_dados_inspecao_teste @NUM_PI DECIMAL(10, 0) ,  @NUM_ITEM DECIMAL(5, 0), @TIP_EMISSAO DECIMAL(4, 0)
 AS
 BEGIN
 
 	BEGIN /*Variáveis*/
 		SET @NUM_PI = 2120010069
-		DECLARE @NUM_ITEM DECIMAL(5, 0) = 1
-		DECLARE @TIP_EMISSAO DECIMAL(4, 0) = 100
+		SET @NUM_ITEM DECIMAL(5, 0) = 1
+		SET @TIP_EMISSAO DECIMAL(4, 0) = 100
 		DECLARE @COD_RAMO DECIMAL(3, 0)
 		DECLARE @NOSSO_NUMERO VARCHAR(20)
 		DECLARE @NUM_APOL DECIMAL(10, 0)
@@ -94,6 +94,10 @@ BEGIN
 	FROM tab_ped WITH (NOLOCK)
 	WHERE num_pi = @NUM_PI
 
+	---
+
+
+
 	IF (@COD_RAMO IN (112,113,114))
 	BEGIN
 		/*
@@ -108,7 +112,7 @@ BEGIN
 			114 = Condominio
 		*/
 		INSERT INTO #TMP_TAB_INSPECAO(
-			codigoRamo
+			 codigoRamo
 			,codigoModalidade 
 			,nomeContato 
 			,telefoneNumeroContato 
@@ -132,29 +136,29 @@ BEGIN
 			,observacoes
 			,descricaoObjetoSegurado)
 		SELECT 
-			 P.COD_RAMO
-			,P.COD_ESTIP
-			,PIN.PESS_CONT
-			,PIN.NUM_TEL
-			,CE.cod_corr
-			,TI.NUM_PED
-			,PL.DSC_CLASF--TI.NOME_EQUIP (RD) //
-			,P.NUM_APOL
-			,P.NUM_ENDO
-			,TI.SIG_UF_RISCO
-			,TI.NOM_CID_RISCO
-			,TI.NUM_CEP_RISCO
-			,TI.NOM_BAIRRO_RISCO
-			,TI.NOM_LOGR_RISCO
-			,TI.NUM_RISCO
-			,TI.DSC_COMPL_RISCO
-			,TI.COD_TIP_LOGR_RISCO
-			,TI.COD_IDEN_PESSOA
-			,TI.NOM_SEGURADO
-			,TI.NUM_CGC_CPF
-			,PIN.DAT_CADASTRO
-			,''				--TI.OBSERVACOES (RD)
-			,PL.DSC_CLASF   --TI.NOME_EQUIP (RD) //                   
+			 P.COD_RAMO					--codigoRamo
+			,P.COD_ESTIP				--codigoModalidade 
+			,ISNULL(PIN.PESS_CONT,'NomeContato')--nomeContato 
+			,PIN.NUM_TEL				--telefoneNumeroContato 
+			,CE.cod_corr				--codigoCorretorPrincipal 
+			,TI.NUM_PED					--numeroProposta 
+			,PL.DSC_CLASF				--numeroObjetoSegurado 
+			,P.NUM_APOL					--numeroApolice 
+			,P.NUM_ENDO					--numeroEndosso 
+			,TI.SIG_UF_RISCO			--codigoUf 
+			,TI.NOM_CID_RISCO			--nomeMunicipio 
+			,TI.NUM_CEP_RISCO			--numeroCep 
+			,TI.NOM_BAIRRO_RISCO		--nomeBairro
+			,TI.NOM_LOGR_RISCO			--nomeLogradouro 
+			,TI.NUM_RISCO				--numeroLogradouro
+			,TI.DSC_COMPL_RISCO			--nomeComplemento
+			,TI.COD_TIP_LOGR_RISCO		--codigoTipoLogradouro
+			,TI.COD_IDEN_PESSOA			--codigoTipoPessoa 
+			,TI.NOM_SEGURADO			--nomeSegurado
+			,TI.NUM_CGC_CPF				--numeroCpfCnpjSegurado
+			,PIN.DAT_CADASTRO			--dataPedidoInspecao
+			,''							--observacoes
+			,PL.DSC_CLASF   			--descricaoObjetoSegurado
 		FROM Tab_Ped P(NOLOCK)
 		INNER JOIN Tab_Ctrl_Emis CE WITH (NOLOCK) ON CE.num_pi = P.num_pi
 		INNER JOIN Tab_ped_loc PL WITH (NOLOCK) ON PL.num_pi = CE.num_pi
@@ -281,8 +285,10 @@ BEGIN
 
 	BEGIN /*Lista de Sinistros*/
 		--listaSinistro
-		--Enviar somente no caso em tipo de emissão = 300 - Endosso
-		--IF (@TIP_EMISSAO = 300)
+		--Consultar somente no caso em tipo de emissão for
+			--300 = Endosso
+			--200 = Renovação Sompo
+		IF (@TIP_EMISSAO in (200,300))
 		BEGIN
 			INSERT INTO #TMP_TAB_SINISTRO
 			SELECT distinct

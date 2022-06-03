@@ -20,10 +20,13 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
         }
 
         // Solicitar inspeção
-        public async Task<DadosInspecao> RetornarDadosInspecao(string pi)
+        public async Task<DadosInspecao> RetornarDadosInspecao(int Num_PI, int Num_Local, int Tip_Emissao)
         {
+            //TODO: Adicionar os demais campos
+            //numpi, numitem, tipemissao
             var parameters = new DynamicParameters( new {
-                NUM_PI = pi
+                NUM_PI = Num_PI,
+
             });
 
             var sql = "RamosDiversos.dbo.sp_brq_buscar_dados_inspecao_teste";
