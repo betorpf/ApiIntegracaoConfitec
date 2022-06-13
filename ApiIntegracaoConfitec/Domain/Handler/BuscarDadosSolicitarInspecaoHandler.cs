@@ -17,7 +17,7 @@ namespace ApiIntegracaoConfitec.Domain.Handler
 
         public async Task<BuscarDadosSolicitarInspecaoResponse> Handle(BuscarDadosSolicitarInspecaoRequest request)
         {
-            DadosInspecao dadosInspecao = await this._sompoRepository.RetornarDadosInspecao(request.Num_PI.ToString());
+            DadosInspecao dadosInspecao = await this._sompoRepository.RetornarDadosInspecao(request.Num_PI, request.Num_Local, request.Tip_Emissao);
 
             BuscarDadosSolicitarInspecaoResponse response = new BuscarDadosSolicitarInspecaoResponse(dadosInspecao);
 

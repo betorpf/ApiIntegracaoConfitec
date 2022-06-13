@@ -36,7 +36,11 @@ namespace ApiIntegracaoConfitec.Business.Sompo
         public async Task<SolicitarInspecaoHttpResponse> Handle(SolicitarInspecaoRequest solicitarInspecaoRequest)
         {
             SolicitarInspecaoHttpResponse solicitarInspecaoResponse =  new();
-            
+
+            //Buscar Dados para Solicitar a Inspeção
+            BuscarDadosSolicitarInspecaoRequest buscarDadosSolicitarInspecaoRequest = new(solicitarInspecaoRequest.Num_PI, solicitarInspecaoRequest.Num_Local, solicitarInspecaoRequest.Tip_Emissao);
+            BuscarDadosSolicitarInspecaoResponse buscaDadosSolicitarInspecaoResponse = await this._buscarDadosSolicitarInspecaoHandler.Handle(buscarDadosSolicitarInspecaoRequest);
+
             //Buscar Dados da autenticação
             BuscarDadosAutenticacaoConfitecResponse buscarDadosAutenticacaoConfitecResponse = await this._buscarDadosAutenticacaoConfitecHandler.Handle();
 
@@ -44,16 +48,14 @@ namespace ApiIntegracaoConfitec.Business.Sompo
             SolicitarAutenticacaoConfitecRequest solicitarAutenticacaoConfitecRequest = new(buscarDadosAutenticacaoConfitecResponse.dadosAutenticacao);
             SolicitarAutenticacaoConfitecResponse solicitarAutenticacaoConfitecResponse = await this._solicitarAutenticacaoConfitecHandler.Handle(solicitarAutenticacaoConfitecRequest);
 
-            //Buscar Dados para Solicitar a Inspeção
-            BuscarDadosSolicitarInspecaoRequest buscarDadosSolicitarInspecaoRequest = new(solicitarInspecaoRequest.Num_PI, solicitarInspecaoRequest.Num_Local, solicitarInspecaoRequest.Tip_Emissao);
-            BuscarDadosSolicitarInspecaoResponse buscaDadosSolicitarInspecaoResponse = await this._buscarDadosSolicitarInspecaoHandler.Handle(buscarDadosSolicitarInspecaoRequest);
-            
+            /*TODO: Validar se precisa ser feita a inspeção nova, senão retornar mensagem para o serviço*/
+
             //Chamar serviço Confitec de Enviar Solicitação de Inspeção
             EnviarSolicitacaoInspecaoConfitecRequest enviarSolicitacaoInspecaoConfitecRequest = new(buscaDadosSolicitarInspecaoResponse.dadosInspecao, solicitarAutenticacaoConfitecResponse.responseToken.access_token);
             EnviarSolicitacaoInspecaoConfitecResponse enviarSolicitacaoInspecaoConfitecResponse =   await this._enviarSolicitacaoInspecaoConfitecHandler.Handle(enviarSolicitacaoInspecaoConfitecRequest);
 
             //Gravar resultado
-            GravarRespostaInspecaoRequest gravarRespostaInspecaoRequest = new(enviarSolicitacaoInspecaoConfitecResponse.response);
+            GravarRespostaInspecaoRequest gravarRespostaInspecaoRequest = new(solicitarInspecaoRequest.Num_PI, solicitarInspecaoRequest.Num_Local, solicitarInspecaoRequest.Tip_Emissao, enviarSolicitacaoInspecaoConfitecResponse.response);
             await this._gravarRespostaInspecaoHandler.Handle(gravarRespostaInspecaoRequest);
 
             //Retornar resultado

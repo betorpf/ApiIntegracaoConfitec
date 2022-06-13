@@ -143,7 +143,7 @@ namespace ApiIntegracaoConfitecTests.Business
 
             //Gravar resultado
             var gravarRespostaInspecaoHandler = new Mock<IGravarRespostaInspecaoHandler>();
-            var gravarRespostaInspecaoRequest = new GravarRespostaInspecaoRequest(enviarSolicitacaoInspecaoConfitecResponse.response);
+            var gravarRespostaInspecaoRequest = new GravarRespostaInspecaoRequest(1, 1, 1, enviarSolicitacaoInspecaoConfitecResponse.response);
             var gravarRespostaInspecaoResponse = new GravarRespostaInspecaoResponse(true, "Sucesso");
             gravarRespostaInspecaoHandler.Setup(s => s.Handle(It.IsAny<GravarRespostaInspecaoRequest>()))
                 .ReturnsAsync(gravarRespostaInspecaoResponse);

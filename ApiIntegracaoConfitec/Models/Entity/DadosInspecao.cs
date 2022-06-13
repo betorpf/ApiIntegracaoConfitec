@@ -5,6 +5,8 @@ namespace ApiIntegracaoConfitec.Models.Entity
 {
     public class DadosInspecao
     {
+        public ResultadoBusca resultadoBusca;
+
         [Required(ErrorMessage = "Código do Ramo não informado.", AllowEmptyStrings = false)]
         public decimal codigoRamo { get; set; }
 

@@ -45,6 +45,11 @@ namespace ApiIntegracaoConfitec.Helpers
                         defaultResponse.Message = e.Message;
                         response.StatusCode = (int)System.Net.HttpStatusCode.BadRequest;
                         break;
+                    case InspecaoException e:
+                        //Custom Inspeção Exception
+                        defaultResponse.Message = e.Message;
+                        response.StatusCode = (int)System.Net.HttpStatusCode.OK;
+                        break;
                     default:
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         defaultResponse.Message = error.Message;

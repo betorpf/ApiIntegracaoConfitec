@@ -37,12 +37,14 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
                 try
                 {
                     var result = await connectionDb.QueryMultipleAsync(sql, parameters, commandType: System.Data.CommandType.StoredProcedure);
+                    var resultadoBusca = result.Read<ResultadoBusca>().First();
                     var dadosInspecao = result.Read<DadosInspecao>().First();
                     var coberturas = result.Read<DadosInspecaoCobertura>().ToList();
                     var contatos = result.Read<DadosInspecaoContato>().ToList();
                     var sinistros = result.Read<DadosInspecaoSinistro>().ToList();
                     var camposVariaveis = result.Read<DadosInspecaoCamposVariaveis>().ToList();
 
+                    dadosInspecao.resultadoBusca = resultadoBusca;
                     dadosInspecao.listaCoberturas = coberturas;
                     dadosInspecao.listaContatos = contatos;
                     dadosInspecao.listaSinistros = sinistros;

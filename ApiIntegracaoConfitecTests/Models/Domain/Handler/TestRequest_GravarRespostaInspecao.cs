@@ -30,7 +30,7 @@ namespace ApiIntegracaoConfitecTests.Models.Domain.Handler
             //Assert
             Assert.Throws(Is.TypeOf<ConfitecErrorsException>()
                           .And.Message.EqualTo("Validação de dados retornados da Confitec"),
-                () => new GravarRespostaInspecaoRequest(enviarSolicitacaoInspecaoConfitecResponse.response));
+                () => new GravarRespostaInspecaoRequest(1, 1, 1, enviarSolicitacaoInspecaoConfitecResponse.response));
         }
     }
 }
