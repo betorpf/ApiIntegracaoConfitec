@@ -18,7 +18,7 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
                 {
                     return;
                 }
-                throw new BRQValidationException(this.dadosInspecao.resultadoBusca.ToString());
+                throw new InspecaoException(this.dadosInspecao.resultadoBusca.ToString());
             }
         }
     }

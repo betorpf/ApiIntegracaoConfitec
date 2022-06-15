@@ -24,11 +24,11 @@ BEGIN
 		SET @MENSAGEM_RETORNO = ''
 	END
 
-	BEGIN /*TESTES*/
-		SET @NUM_PI = 2020012789
-		SET @NUM_ITEM = 1
-		SET @TIP_EMISSAO = 100
-	END
+	--BEGIN /*TESTES*/
+	--	SET @NUM_PI = 2020012789
+	--	SET @NUM_ITEM = 1
+	--	SET @TIP_EMISSAO = 100
+	--END
 
 	BEGIN /*Variáveis*/
 		DECLARE @NOSSO_NUMERO	VARCHAR(20)
@@ -115,7 +115,7 @@ BEGIN
 	SELECT @DAT_CAD_INSP_ANTERIOR = CONVERT(datetime, convert(char(10),dat_cad,120))
 	FROM Inspecao..tab_insp WITH(NOLOCK)
 	WHERE num_insp = @NUM_INSP_ANTERIOR --Inspeção da apolice anterior
-	SELECT @DAT_CAD_INSP_ANTERIOR 
+	
 
 	--Para o Residencial (COD_RAMO = 113) são 5 anos e demais 3 anos
 	IF(@COD_RAMO = 113) 
@@ -185,6 +185,9 @@ BEGIN
 		BEGIN 
 			SET @CRIAR_NOVA = 1
 			SET @MENSAGEM_RETORNO = 'Há diferenças entre as tabelas Inspecao..Tab_Insp (num_insp = ' + CONVERT(VARCHAR, @NUM_INSP_ANTERIOR) + ') e YAS_ND.YAS.TAB_PED_LOC (NUM_PED = ' + convert(varchar, @NUM_PROP) + ' - NUM_PI = ' + convert(varchar, @NUM_PI) + ') .'
+			
+			--SELECT * FROM #TMP_COMPARAR_TAB_INSP
+			--SELECT * FROM #TMP_COMPARAR_TAB_PED_LOC
 			--PRINT @MENSAGEM_RETORNO
 			RETURN
 		END 
@@ -217,8 +220,6 @@ BEGIN
 			--PRINT @MENSAGEM_RETORNO 
 			RETURN
 		END 
-
-	
 	END
 
 	RETURN

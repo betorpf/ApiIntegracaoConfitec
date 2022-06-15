@@ -20,13 +20,14 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
         }
 
         // Solicitar inspeção
-        public async Task<DadosInspecao> RetornarDadosInspecao(int Num_PI, int Num_Local, int Tip_Emissao)
+        public async Task<DadosInspecao> RetornarDadosInspecao(Int64 Num_PI, int Num_Local, int Tip_Emissao)
         {
             //TODO: Adicionar os demais campos
             //numpi, numitem, tipemissao
             var parameters = new DynamicParameters( new {
                 NUM_PI = Num_PI,
-
+                NUM_ITEM = Num_Local,
+                TIP_EMISSAO = Tip_Emissao
             });
 
             var sql = "RamosDiversos.dbo.sp_brq_buscar_dados_inspecao_teste";
@@ -37,12 +38,15 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
                 try
                 {
                     var result = await connectionDb.QueryMultipleAsync(sql, parameters, commandType: System.Data.CommandType.StoredProcedure);
-                    var resultadoBusca = result.Read<ResultadoBusca>().First();
-                    var dadosInspecao = result.Read<DadosInspecao>().First();
+                    var resultadoBusca = result.Read<ResultadoBusca>().FirstOrDefault();
+                    var dadosInspecao = result.Read<DadosInspecao>().FirstOrDefault();
                     var coberturas = result.Read<DadosInspecaoCobertura>().ToList();
                     var contatos = result.Read<DadosInspecaoContato>().ToList();
                     var sinistros = result.Read<DadosInspecaoSinistro>().ToList();
                     var camposVariaveis = result.Read<DadosInspecaoCamposVariaveis>().ToList();
+
+                    if (dadosInspecao == null)
+                        dadosInspecao = new DadosInspecao();
 
                     dadosInspecao.resultadoBusca = resultadoBusca;
                     dadosInspecao.listaCoberturas = coberturas;

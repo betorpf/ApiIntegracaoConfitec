@@ -1,0 +1,11 @@
+1 - Metodo Solicitar Inspeção:
+ - Validar a query de reutilização de inspeção antiga
+ - Gravar o resultado do post (updates e inserts)
+
+2 - Cancelar Inspeção
+ - Quais dados enviar
+ - Quais dados vamos receber
+ - O que deve ser gravado no banco
+
+3 - Receber Laudo
+ - O que fazer com os dados recebidos

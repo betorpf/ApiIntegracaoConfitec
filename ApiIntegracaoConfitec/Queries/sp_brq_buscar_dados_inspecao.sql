@@ -13,17 +13,18 @@ CREATE PROCEDURE sp_brq_buscar_dados_inspecao_teste @NUM_PI DECIMAL(10, 0) ,  @N
 AS
 BEGIN
 
-	BEGIN /*TESTES*/
-		SET @NUM_PI = 2120010069
-		SET @NUM_ITEM = 1
-		SET @TIP_EMISSAO = 100
-	END
+	--BEGIN /*TESTES*/
+	--	SET @NUM_PI = 2120010069
+	--	SET @NUM_ITEM = 1
+	--	SET @TIP_EMISSAO = 100
+	--END
 
 	BEGIN /*Variáveis*/
 		DECLARE @COD_RAMO DECIMAL(3, 0)
-		DECLARE @NOSSO_NUMERO VARCHAR(20)
+		DECLARE @NOSSO_NUMERO_OLD VARCHAR(20)
+		DECLARE @NOSSO_NUMERO_NEW VARCHAR(20)
 		DECLARE @NUM_APOL DECIMAL(10, 0)
-		DECLARE	@CRIAR_NOVA BIT
+		DECLARE	@CRIAR_NOVA BIT = 1
 		DECLARE @MENSAGEM_RETORNO VARCHAR(200)
 	END
 
@@ -78,6 +79,8 @@ BEGIN
 			,dataPedidoInspecao DECIMAL(8, 0)
 			,observacoes VARCHAR(250)
 			,descricaoObjetoSegurado VARCHAR(130)
+			,nossoNumeroOld varchar(20)
+			,nossoNumeroNew varchar(20)
 		)
 
 		CREATE TABLE #TMP_TAB_COBERTURA (
@@ -109,9 +112,10 @@ BEGIN
 		WHERE num_pi = @NUM_PI
 	END
 
+	IF(@TIP_EMISSAO IN (200,300))
 	BEGIN/*Se Tipo da Emissão:
 			200 - Renovação Sompo
-			300 - Endosso)
+			300 - Endosso
 			Validar se precisa solicitar nova inspeção
 		*/
 		EXEC sp_brq_validar_criar_inspecao_teste @NUM_PI, @NUM_ITEM, @TIP_EMISSAO, @COD_RAMO, @CRIAR_NOVA OUTPUT, @MENSAGEM_RETORNO OUTPUT
@@ -130,7 +134,7 @@ BEGIN
 				200 = Renovação Sompo
 				300 = Endosso
 				101 = Renovação Congenere
-			Ramos RE:
+			Ramos RE (Elemtares):
 				112 = Empresarial
 				113 = Residencial
 				114 = Condominio
@@ -158,7 +162,9 @@ BEGIN
 				,numeroCpfCnpjSegurado
 				,dataPedidoInspecao
 				,observacoes
-				,descricaoObjetoSegurado)
+				,descricaoObjetoSegurado
+				,nossoNumeroOld
+				,nossoNumeroNew)
 			SELECT 
 				 P.COD_RAMO					--codigoRamo
 				,P.COD_ESTIP				--codigoModalidade 
@@ -183,13 +189,16 @@ BEGIN
 				,PIN.DAT_CADASTRO			--dataPedidoInspecao
 				,''							--observacoes
 				,PL.DSC_CLASF   			--descricaoObjetoSegurado
+				,PNC.NOSSO_NUMERO_OLD
+				,PNC.NOSSO_NUMERO_NEW
 			FROM Tab_Ped P(NOLOCK)
 			INNER JOIN Tab_Ctrl_Emis CE WITH (NOLOCK) ON CE.num_pi = P.num_pi
 			INNER JOIN Tab_ped_loc PL WITH (NOLOCK) ON PL.num_pi = CE.num_pi
-			INNER JOIN Tab_Trans_Insp TI WITH (NOLOCK) ON TI.NOSSO_NUMERO = PL.NOSSO_NUMERO
+			INNER JOIN TAB_PED_INSP PIN WITH (NOLOCK) ON PIN.NOSSO_NUMERO = PL.NOSSO_NUMERO
+				AND PIN.NUM_ITEM = PL.NUM_ITEM
+			INNER JOIN Tab_Ped_Num_Copia PNC WITH (NOLOCK) ON PNC.NOSSO_NUMERO_NEW = PL.NOSSO_NUMERO
+			INNER JOIN Tab_Trans_Insp TI WITH (NOLOCK) ON TI.NOSSO_NUMERO = PNC.NOSSO_NUMERO_OLD
 				AND TI.NUM_ITEM = PL.NUM_ITEM
-			INNER JOIN TAB_PED_INSP PIN WITH (NOLOCK) ON PIN.NOSSO_NUMERO = TI.NOSSO_NUMERO
-				AND PIN.NUM_ITEM = TI.NUM_ITEM
 			WHERE P.num_pi = @NUM_PI
 				AND PL.num_item = @NUM_ITEM
 		END
@@ -201,7 +210,7 @@ BEGIN
 				200 = Renovação Sompo
 				300 = Endosso
 				101 = Renovação Congenere
-			Ramos RD:
+			Ramos RD (Diversos):
 				300
 				620
 				710
@@ -229,7 +238,9 @@ BEGIN
 				,numeroCpfCnpjSegurado
 				,dataPedidoInspecao
 				,observacoes
-				,descricaoObjetoSegurado)
+				,descricaoObjetoSegurado
+				,nossoNumeroOld
+				,nossoNumeroNew)
 			SELECT 
 				 P.COD_RAMO
 				,P.COD_ESTIP
@@ -254,19 +265,23 @@ BEGIN
 				,PIN.DAT_CADASTRO
 				,TI.OBSERVACOES
 				,TI.NOME_EQUIP
+				,PNC.NOSSO_NUMERO_OLD
+				,PNC.NOSSO_NUMERO_NEW
 			FROM Tab_Ped P(NOLOCK)
 			INNER JOIN Tab_Ctrl_Emis CE WITH (NOLOCK) ON CE.num_pi = P.num_pi
 			INNER JOIN Tab_ped_loc PL WITH (NOLOCK) ON PL.num_pi = CE.num_pi
-			INNER JOIN Tab_Trans_Insp_Equipamentos TI WITH (NOLOCK) ON TI.NOSSO_NUMERO = PL.NOSSO_NUMERO
+			INNER JOIN TAB_PED_INSP PIN WITH (NOLOCK) ON PIN.NOSSO_NUMERO = PL.NOSSO_NUMERO
+				AND PIN.NUM_ITEM = PL.NUM_ITEM
+			INNER JOIN Tab_Ped_Num_Copia PNC WITH (NOLOCK) ON PNC.NOSSO_NUMERO_NEW = PL.NOSSO_NUMERO
+			INNER JOIN Tab_Trans_Insp_Equipamentos TI WITH (NOLOCK) ON TI.NOSSO_NUMERO = PNC.NOSSO_NUMERO_OLD
 				AND TI.NUM_ITEM = PL.NUM_ITEM
-			INNER JOIN TAB_PED_INSP PIN WITH (NOLOCK) ON PIN.NOSSO_NUMERO = TI.NOSSO_NUMERO
-				AND PIN.NUM_ITEM = TI.NUM_ITEM
 			WHERE P.num_pi = @NUM_PI
 				AND PL.num_item = @NUM_ITEM
 		END
 
 		BEGIN /*Recupera o Nosso Número*/
-			SELECT TOP 1 @NOSSO_NUMERO = @NOSSO_NUMERO --tab_ped.NOSSO_NUMERO
+			SELECT TOP 1 @NOSSO_NUMERO_OLD = nossoNumeroOld
+			,@NOSSO_NUMERO_NEW = nossoNumeroNew --tab_ped.NOSSO_NUMERO
 			FROM #TMP_TAB_INSPECAO WITH (NOLOCK)
 		END
 
@@ -278,8 +293,8 @@ BEGIN
 				 COD_COBERT
 				,LMG_COBERT
 			FROM TAB_TRANS_COBERT_INSP WITH (NOLOCK)
-			WHERE NOSSO_NUMERO = '02209738537470898157'
-				AND NUM_ITEM = 1
+			WHERE NOSSO_NUMERO = @NOSSO_NUMERO_OLD
+				AND NUM_ITEM = @NUM_ITEM
 		END
 
 		BEGIN /*Lista de Contatos*/
@@ -290,8 +305,8 @@ BEGIN
 				 PESS_CONTATO_2
 				,NUM_TEL_2
 			FROM TAB_PED_INSP_COMPL WITH (NOLOCK)
-			WHERE NOSSO_NUMERO = '02207755358996309133'
-				AND NUM_ITEM = 2
+			WHERE NOSSO_NUMERO = @NOSSO_NUMERO_NEW
+				AND NUM_ITEM = @NUM_ITEM
 				AND ISNULL(PESS_CONTATO_2,'') <>''
 
 			INSERT INTO #TMP_TAB_CONTATO
@@ -299,8 +314,8 @@ BEGIN
 				 PESS_CONTATO_3
 				,NUM_TEL_3
 			FROM TAB_PED_INSP_COMPL WITH (NOLOCK)
-			WHERE NOSSO_NUMERO = '02207755358996309133'
-				AND NUM_ITEM = 2
+			WHERE NOSSO_NUMERO = @NOSSO_NUMERO_NEW
+				AND NUM_ITEM = @NUM_ITEM
 				AND ISNULL(PESS_CONTATO_3,'') <>''
 
 		END
@@ -321,8 +336,8 @@ BEGIN
 				FROM SPX21250PSQLNEO.YAS_ND.YAS.TAB_SAP_SIN S
 					INNER JOIN SPX21250PSQLNEO.YAS_ND.YAS.TAB_SAP_SIN_PAG SP
 					ON S.NUM_SIN = SP.NUM_SIN
-				WHERE SP.NUM_APOL = 1600026060
-					AND SP.NUM_ITEM = 1
+				WHERE SP.NUM_APOL = @NUM_APOL
+					AND SP.NUM_ITEM = @NUM_ITEM
 			END
 		END
 
@@ -334,8 +349,8 @@ BEGIN
 				 COD_FATOR
 				,DSC_COMPL_FATOR
 			FROM TAB_PED_FAT_RISCO
-			WHERE NOSSO_NUMERO = '02200544192996300373'
-				AND NUM_ITEM = 1
+			WHERE NOSSO_NUMERO = @NOSSO_NUMERO_NEW
+				AND NUM_ITEM = @NUM_ITEM
 		END
 
 	END

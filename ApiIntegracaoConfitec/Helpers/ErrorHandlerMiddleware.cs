@@ -48,6 +48,7 @@ namespace ApiIntegracaoConfitec.Helpers
                     case InspecaoException e:
                         //Custom Inspeção Exception
                         defaultResponse.Message = e.Message;
+                        defaultResponse.Success = true;
                         response.StatusCode = (int)System.Net.HttpStatusCode.OK;
                         break;
                     default:

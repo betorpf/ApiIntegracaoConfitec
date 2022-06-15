@@ -1,17 +1,18 @@
 ﻿using ApiIntegracaoConfitec.Domain.Utility;
 using ApiIntegracaoConfitec.Helpers;
 using ApiIntegracaoConfitec.Models.Confitec;
+using System;
 
 namespace ApiIntegracaoConfitec.Models.Domain.Handler
 {
     public class GravarRespostaInspecaoRequest
     {
         public ConfitecSolicitarInspecao responseSolicitacaoInspecao { get; set; }
-        public int Num_PI { get; set; }
+        public Int64 Num_PI { get; set; }
         public int Num_Local { get; set; }
         public int Tip_Emissao { get; set; }
 
-        public GravarRespostaInspecaoRequest(int num_PI, int num_Local, int tip_Emissao, ConfitecSolicitarInspecao responseSolicitacaoInspecao)
+        public GravarRespostaInspecaoRequest(Int64 num_PI, int num_Local, int tip_Emissao, ConfitecSolicitarInspecao responseSolicitacaoInspecao)
         {
             this.responseSolicitacaoInspecao = responseSolicitacaoInspecao;
             this.Num_PI = num_PI;

@@ -15,10 +15,9 @@ namespace ApiIntegracaoConfitec.Models.Entity
         public override string ToString()
         {
             if (!solicitarInspecao)
-                return $"Não é possível solicitar a inspeção. Cód.: {this.codigoResultado} - Descrição: {this.descricaoResultado}";
+                return $"Não é necessário solicitar a inspeção. Cód.: {this.codigoResultado} - Descrição: {this.descricaoResultado}";
             else
-                return $"É possível solicitar a inspeção. Cód.: {this.codigoResultado} - Descrição: {this.descricaoResultado}";
+                return $"É necessário solicitar a inspeção. Cód.: {this.codigoResultado} - Descrição: {this.descricaoResultado}";
         }
-
     }
 }
