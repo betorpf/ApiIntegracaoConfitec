@@ -143,7 +143,7 @@ namespace ApiIntegracaoConfitecTests.Business
 
             //Gravar resultado
             var gravarRespostaInspecaoHandler = new Mock<IGravarRespostaInspecaoHandler>();
-            var gravarRespostaInspecaoRequest = new GravarRespostaInspecaoRequest(1, 1, 1, enviarSolicitacaoInspecaoConfitecResponse.response);
+            var gravarRespostaInspecaoRequest = new GravarRespostaInspecaoRequest(solicitarInspecaoRequest, enviarSolicitacaoInspecaoConfitecResponse.response);
             var gravarRespostaInspecaoResponse = new GravarRespostaInspecaoResponse(true, "Sucesso");
             gravarRespostaInspecaoHandler.Setup(s => s.Handle(It.IsAny<GravarRespostaInspecaoRequest>()))
                 .ReturnsAsync(gravarRespostaInspecaoResponse);
@@ -166,7 +166,7 @@ namespace ApiIntegracaoConfitecTests.Business
         public void CancelarInspecaoHandler()
         {
             //Arrange
-            CancelarInspecaoRequest cancelarInspecaoRequest = new CancelarInspecaoRequest() { PI = 1 };
+            CancelarInspecaoRequest cancelarInspecaoRequest = new CancelarInspecaoRequest() { Num_PI = 1 };
 
             //Buscar Dados da autenticação
             var buscarDadosAutenticacaoConfitecResponse = new BuscarDadosAutenticacaoConfitecResponse(this.DadosAutenticacaoPadrao);

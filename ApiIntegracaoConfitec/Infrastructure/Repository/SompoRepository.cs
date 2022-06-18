@@ -30,7 +30,7 @@ namespace ApiIntegracaoConfitec.Infrastructure.Repository
                 TIP_EMISSAO = Tip_Emissao
             });
 
-            var sql = "RamosDiversos.dbo.sp_brq_buscar_dados_inspecao_teste";
+            var sql = "RamosDiversos.dbo.sp_brq_buscar_dados_inspecao";
 
             using (var connectionDb = this._connection.Connection())
             {

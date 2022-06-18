@@ -1,12 +1,13 @@
 ﻿using ApiIntegracaoConfitec.Interfaces.Services;
+using System;
 
 namespace ApiIntegracaoConfitec.Models.Confitec
 {
     public class RequestCancelamentoInspecao : IRequest
     {
-        public int NumPI { get; set; }
+        public Int64 NumPI { get; set; }
 
-        public RequestCancelamentoInspecao (int NumPI)
+        public RequestCancelamentoInspecao (Int64 NumPI)
         {
             this.NumPI = NumPI;
         }

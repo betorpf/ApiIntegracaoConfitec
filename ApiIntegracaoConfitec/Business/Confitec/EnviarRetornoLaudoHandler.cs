@@ -26,7 +26,6 @@ namespace ApiIntegracaoConfitec.Business.Confitec
             {
                 Success = true,
                 Message = "Retorno de Laudo recebido com sucesso",
-                Errors = null
             };
 
         }

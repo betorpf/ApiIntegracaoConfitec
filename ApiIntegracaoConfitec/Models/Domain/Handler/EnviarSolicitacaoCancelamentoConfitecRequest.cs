@@ -1,14 +1,15 @@
 ﻿using ApiIntegracaoConfitec.Models.Entity;
+using System;
 
 namespace ApiIntegracaoConfitec.Models.Domain.Handler
 {
     public class EnviarSolicitacaoCancelamentoConfitecRequest
     {
         public string access_token;
-        public int NumPI { get; set; }
+        public Int64 NumPI { get; set; }
         public bool Success { get; set; }
 
-        public EnviarSolicitacaoCancelamentoConfitecRequest(int numPI, string access_token)
+        public EnviarSolicitacaoCancelamentoConfitecRequest(Int64 numPI, string access_token)
         {
             this.NumPI = numPI;
             this.access_token = access_token;

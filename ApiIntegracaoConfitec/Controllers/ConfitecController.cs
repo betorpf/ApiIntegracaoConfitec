@@ -11,13 +11,13 @@ namespace ApiIntegracaoConfitec.Controllers
     [ApiController]
     public class ConfitecController : Controller
     {
+        //POST: Confitec/EnviarRetornoInspecao
         [Route("EnviarResultadoInspecao")]
         [HttpPost]
         public async Task<ActionResult<IResultHttpResponse>> EnviarResultadoInspecao(
                 [FromServices] IEnviarRetornoLaudoHandler handler,
                 [FromBody] ResultadoInspecaoRequest request)
         {
-            //TODO Revisar
             RetornarDadosLaudoResponse response = await handler.Handle(request);
             return this.Ok(response);
         }

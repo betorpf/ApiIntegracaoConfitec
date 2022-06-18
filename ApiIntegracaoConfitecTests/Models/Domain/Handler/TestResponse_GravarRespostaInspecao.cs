@@ -11,7 +11,7 @@ namespace ApiIntegracaoConfitecTests.Models.Domain.Handler
         public void GravarRespostaInspecaoResponseFalha()
         {
             //Act/Assert
-            Assert.Throws(Is.TypeOf<BRQValidationException>()
+            Assert.Throws(Is.TypeOf<CommunicationException>()
                           .And.Message.EqualTo("Falha"),
                 () => new GravarRespostaInspecaoResponse(false, "Falha"));
         }

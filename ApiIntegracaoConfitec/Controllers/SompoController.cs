@@ -10,10 +10,9 @@ namespace ApiIntegracaoConfitec.Controllers
     [ApiController]
     public class SompoController : ControllerBase
     {
-        //POST: api/SolicitarInspecao
+        //POST: Sompo/SolicitarInspecao
         [Route("SolicitarInspecao")]
         [HttpPost]
-        //[Authorize] //TODO: VALIDAR
         public async Task<ActionResult<IResultHttpResponse>> SolicitarInspecao(
                 [FromServices] ISolicitarInspecaoHandler handler,
                 [FromBody] SolicitarInspecaoRequest request)
@@ -22,10 +21,9 @@ namespace ApiIntegracaoConfitec.Controllers
             return this.Ok(response);
         }
 
-        //POST: api/CancelarInspecao
+        //POST: Sompo/CancelarInspecao
         [Route("CancelarInspecao")]
         [HttpPost]
-        //[Authorize] //TODO: VALIDAR
         public async Task<ActionResult<IResultHttpResponse>> CancelarInspecao(
                 [FromServices] ICancelarInspecaoHandler handler,
                 [FromBody] CancelarInspecaoRequest request)

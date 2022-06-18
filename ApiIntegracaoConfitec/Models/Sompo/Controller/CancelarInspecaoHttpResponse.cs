@@ -10,14 +10,12 @@ namespace ApiIntegracaoConfitec.Models.Sompo.Controller
 {
     public class CancelarInspecaoHttpResponse : IResultHttpResponse
     {
-        public int NumPI { get; set; }
         public bool Success { get; set; }
         public string Message { get; set; }
         public List<string> Errors { get; set; }
         
-        public CancelarInspecaoHttpResponse(int numPI)
+        public CancelarInspecaoHttpResponse()
         {
-            this.NumPI = numPI;
             this.Errors = new List<string>();
         }
     }

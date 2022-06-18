@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "dc1a6cf4-218c-471f-83d6-85701ab8f7ca",
+		"name": "Casos de Teste",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17188008"
+	},
+	"item": [
+		{
+			"name": "Tipo 100 - Criar Inspeção",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"num_PI\": \"2220018105\",\r\n  \"num_Local\": 1,\r\n  \"tip_Emissao\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{UrlApiBRQ}}/Sompo/SolicitarInspecao",
+					"host": [
+						"{{UrlApiBRQ}}"
+					],
+					"path": [
+						"Sompo",
+						"SolicitarInspecao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tipo 200 - Reaproveitar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"num_PI\": \"2220018120\",\r\n  \"num_Local\": 1,\r\n  \"tip_Emissao\": 200\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{UrlApiBRQ}}/Sompo/SolicitarInspecao",
+					"host": [
+						"{{UrlApiBRQ}}"
+					],
+					"path": [
+						"Sompo",
+						"SolicitarInspecao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tipo 300",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"num_PI\": \"2220033903\",\r\n  \"num_Local\": 1,\r\n  \"tip_Emissao\": 300\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{UrlApiBRQ}}/Sompo/SolicitarInspecao",
+					"host": [
+						"{{UrlApiBRQ}}"
+					],
+					"path": [
+						"Sompo",
+						"SolicitarInspecao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tipo 620",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Bearer_iRisk}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"num_PI\": \"2220033904\",\r\n  \"num_Local\": 1,\r\n  \"tip_Emissao\": 620\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{UrlApiBRQ}}/Sompo/SolicitarInspecao",
+					"host": [
+						"{{UrlApiBRQ}}"
+					],
+					"path": [
+						"Sompo",
+						"SolicitarInspecao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tipo 710",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{Bearer_iRisk}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"num_PI\": \"2220033905\",\r\n  \"num_Local\": 1,\r\n  \"tip_Emissao\": 710\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{UrlApiBRQ}}/Sompo/SolicitarInspecao",
+					"host": [
+						"{{UrlApiBRQ}}"
+					],
+					"path": [
+						"Sompo",
+						"SolicitarInspecao"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

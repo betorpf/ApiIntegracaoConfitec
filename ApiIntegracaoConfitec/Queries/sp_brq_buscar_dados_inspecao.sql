@@ -4,12 +4,12 @@ GO
 IF EXISTS (
 		SELECT *
 		FROM sys.objects WITH (NOLOCK)
-		WHERE name = 'sp_brq_buscar_dados_inspecao_teste'
+		WHERE name = 'sp_brq_buscar_dados_inspecao'
 		)
-	DROP PROCEDURE sp_brq_buscar_dados_inspecao_teste
+	DROP PROCEDURE sp_brq_buscar_dados_inspecao
 GO
 
-CREATE PROCEDURE sp_brq_buscar_dados_inspecao_teste @NUM_PI DECIMAL(10, 0) ,  @NUM_ITEM DECIMAL(5, 0), @TIP_EMISSAO DECIMAL(4, 0)
+CREATE PROCEDURE sp_brq_buscar_dados_inspecao @NUM_PI DECIMAL(10, 0) ,  @NUM_ITEM DECIMAL(5, 0), @TIP_EMISSAO DECIMAL(4, 0)
 AS
 BEGIN
 
@@ -118,7 +118,7 @@ BEGIN
 			300 - Endosso
 			Validar se precisa solicitar nova inspeção
 		*/
-		EXEC sp_brq_validar_criar_inspecao_teste @NUM_PI, @NUM_ITEM, @TIP_EMISSAO, @COD_RAMO, @CRIAR_NOVA OUTPUT, @MENSAGEM_RETORNO OUTPUT
+		EXEC sp_brq_validar_criar_inspecao @NUM_PI, @NUM_ITEM, @TIP_EMISSAO, @COD_RAMO, @CRIAR_NOVA OUTPUT, @MENSAGEM_RETORNO OUTPUT
 	END
 
 	INSERT INTO #TMP_RESULTADO (codigoResultado, descricaoResultado, solicitarInspecao)

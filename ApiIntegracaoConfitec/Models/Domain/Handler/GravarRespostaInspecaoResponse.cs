@@ -13,7 +13,7 @@ namespace ApiIntegracaoConfitec.Models.Domain.Handler
             
             if (!this.Success)
             {
-                throw new BRQValidationException(this.Message);
+                throw new CommunicationException(this.Message);
             }
         }
     }

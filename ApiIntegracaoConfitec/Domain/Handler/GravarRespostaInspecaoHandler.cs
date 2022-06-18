@@ -19,7 +19,7 @@ namespace ApiIntegracaoConfitec.Domain.Handler
         {
             QueryResult queryResult = await this._sompoRepository.GravarRetornoSolicitarInspecao(request.responseSolicitacaoInspecao);
 
-            GravarRespostaInspecaoResponse response = new GravarRespostaInspecaoResponse(queryResult.Success, queryResult.Message);
+            GravarRespostaInspecaoResponse response = new(queryResult.Success, queryResult.Message);
 
             return response;
         }
